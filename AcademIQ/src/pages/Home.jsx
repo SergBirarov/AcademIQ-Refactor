@@ -1,9 +1,9 @@
-import Layout from '../layouts/GeneralContainer'
+import HomeLayout from '../layouts/HomeLayout'
 
 export default function Home() {
     return (
-        <Layout>
+        <HomeLayout>
             Home
-        </Layout>
+        </HomeLayout>
     )
 }
