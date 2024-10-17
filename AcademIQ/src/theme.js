@@ -68,7 +68,7 @@ const theme = createTheme({
       fontSize: GetResponsiveSize(16, 1, 18), // 16-18px
       fontWeight: 400, // Regular
       lineHeight: GetResponsiveSize(24, 1.4, 28), // 24-28px
-      marginBottom: GetResponsiveSize(16, 1, 24), // 16-24px
+      // marginBottom: GetResponsiveSize(16, 1, 24), // 16-24px
     },
     cardTitle: {
       fontSize: GetResponsiveSize(18, 1.2, 20), // 18-20px
@@ -101,6 +101,7 @@ const theme = createTheme({
           width: GetResponsiveSize(48, 4, 60), // 48-60px
           height: GetResponsiveSize(32, 2, 40), // 32-40px
           fontSize: GetResponsiveSize(14, 1.2, 16), // 14-16px
+          fontWeight: 600, // Semi-Bold
           padding: '0.875rem',
           borderRadius: '0.5rem',
         },
@@ -108,6 +109,7 @@ const theme = createTheme({
           width: GetResponsiveSize(100, 8, 120), // 100-120px
           height: GetResponsiveSize(36, 4, 44), // 36-44px
           fontSize: GetResponsiveSize(16, 1.4, 18), // 16-18px
+          fontWeight: 600, // Semi-Bold
           padding: '1rem',
           borderRadius: '0.75rem',
         },
@@ -115,6 +117,7 @@ const theme = createTheme({
           width: GetResponsiveSize(260, 10, 280), // 140-160px
           height: GetResponsiveSize(44, 4, 48),
           fontSize: GetResponsiveSize(18, 1.6, 20), // 18-20px
+          fontWeight: 600, // Semi-Bold
           padding: '1.25rem',
           borderRadius: '1rem',
         },

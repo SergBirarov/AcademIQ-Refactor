@@ -1,27 +1,8 @@
-import { Avatar, Box, Card, CardContent, Typography, styled, Grid2 } from "@mui/material";
+import { Card, CardContent, Typography, styled, Grid2 } from "@mui/material";
+import { UserAvatar } from "./UserAvatar";
 import { useUser } from "../../../context/UserContext";
 
- const UserAvatat = ({image, size = "medium"}) => {
-
-    const sizes = {
-        small: { width: 50, height: 50 },
-        medium: { width: 100, height: 100 },
-        large: { width: 150, height: 150 },
-    };
-
-    
-    return(
-        <Box>
-            <Avatar
-                src={image } 
-                sx={{
-                    width: sizes[size].width,
-                    height: sizes[size].height,
-                }}
-            />
-        </Box>
-    )
-}
+ 
 
 const CardStyled = styled(Card)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
@@ -37,12 +18,17 @@ const CardStyled = styled(Card)(({ theme }) => ({
 export default function UserPanel(){
     const { user } = useUser();
 
+    if(!user){
+        return (
+            <div>Loading...</div>
+        )}
+
     return(
         <CardStyled>
                 <CardContent>
 
                         <Grid2 item xs={12} sm={12} display="flex" flexDirection="column" justifyContent="space-between"  alignItems="center">
-                            <UserAvatat image={user?.picture_URL} size="small"/>
+                            <UserAvatar image={user.picture_URL} size="small"/>
                             <Typography
                              variant="h6"
                               align="center">

@@ -1,8 +1,11 @@
-import { Box, Toolbar, CssBaseline, AppBar, Container, styled } from '@mui/material';
+import { Box, Container, styled } from '@mui/material';
 import { useState } from 'react';
 import Drawer from '@mui/material/Drawer';
 import UserPanel from '../components/common/profile/UserPanel';
 import UserMenu from '../components/common/profile/UserMenu';
+import { LogOutButton } from '../components/common/buttons/LogOutButton';
+import { Outlet }   from 'react-router-dom'
+
 
 const drawerWidth = 240; 
 const LayoutContainer = styled(Container)(({ theme }) => ({
@@ -17,7 +20,7 @@ const LayoutContainer = styled(Container)(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
   }));
 
-export default function HomeLayout({ children }) {
+export default function HomeLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
 
@@ -45,9 +48,22 @@ export default function HomeLayout({ children }) {
         ModalProps={{
             keepMounted: true, 
           }}
-      >
+      > 
+        <Box>
         <UserPanel />
+        </Box>
+        <Box>
         <UserMenu />
+        </Box>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+          width: '100%',
+        }}>
+        <LogOutButton />
+        </Box>
       </Drawer>
       {/* Main content area */}
       <Box
@@ -58,7 +74,7 @@ export default function HomeLayout({ children }) {
           marginLeft: { xs: 0, sm: drawerWidth },
         }}
       >
-        {children} 
+        <Outlet/>
       </Box>
     </LayoutContainer>
   );

@@ -1,6 +1,6 @@
 import { Typography, Box, Grid2 } from '@mui/material';
 import { GetVw } from '../../utils/GeneralHelpers';
-import LandingButton from '../landing/LandingButton';
+import LandingButton from '../common/buttons/LandingButton';
 
 
 export default function HeroSection() {
