@@ -1,6 +1,7 @@
 import { useUser } from "../../../context/UserContext";
 import { Box, Tooltip, IconButton } from "@mui/material";
 import { useState } from "react";
+import { GetVw, GetVh } from "../../../utils/GeneralHelpers";
 
 
 const svg = ['https://academiq-assets.s3.eu-north-1.amazonaws.com/a+plus.svg',
@@ -38,9 +39,8 @@ export default function BubbleMenu() {
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
-        minWidth: '80%',
-        minHeight: '80%',
-        height: '100%',
+        width: `${GetVw(800)}`,
+        height: `${GetVh(300)}`,
         gap: '20px',
         padding: '20px',
         border: '2px solid #ccc',

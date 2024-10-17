@@ -14,12 +14,12 @@ const studentMenuItems = [
     // { text: 'Logout', icon: <LogoutIcon /> },
 ];
 
-const professorMenuItems = [
-    { text: 'Dashboard', icon: <HomeIcon /> },
-    { text: 'Manage Courses', icon: <AssignmentIcon /> },
-    { text: 'Settings', icon: <SettingsIcon /> },
-    // { text: 'Logout', icon: <LogoutIcon /> },
-];
+// const professorMenuItems = [
+//     { text: 'Dashboard', icon: <HomeIcon /> },
+//     { text: 'Manage Courses', icon: <AssignmentIcon /> },
+//     { text: 'Settings', icon: <SettingsIcon /> },
+//     // { text: 'Logout', icon: <LogoutIcon /> },
+// ];
 
 const StyledBox = styled(Box)(({ theme }) => ({
     display: 'flex',
