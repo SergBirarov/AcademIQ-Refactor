@@ -5,13 +5,14 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Performance from './pages/Performance';
 import HomeLayout from './layouts/HomeLayout';
+import Attendance from './pages/Attendance';
 
 
 
 const AppRouter = () => {
 
-    return (
-      <Router>
+  return (
+    <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<LoginPage />} />
@@ -19,11 +20,12 @@ const AppRouter = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/performance" element={<Performance />} />
-          
+          <Route path="/attendance" element={<Attendance />} />
+
         </Route>
       </Routes>
     </Router>
-    );
-  };
+  );
+};
 
-  export default AppRouter;
+export default AppRouter;
