@@ -49,7 +49,7 @@ export default function UserMenu() {
                     sx={{ 
                         display: 'flex', 
                         alignItems: 'center',
-                        '&:hover': { backgroundColor: theme.palette.primary.light }, 
+                        '&:hover': { backgroundColor: theme.palette.secondary.light }, 
                         cursor: 'pointer' 
                     }}>
                         <ListItemIcon sx={{ color: theme.palette.primary.main, mx: 0, mr: 2 }}>

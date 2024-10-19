@@ -1,9 +1,8 @@
 import { Typography, Container, Grid2} from '@mui/material'
 import { GetVw, GetVh } from '../utils/GeneralHelpers';
-import { SectionTitle } from '../components/common/home/SectionTitle';
+import { SectionTitle, SubSectionTitle } from '../components/common/SectionTitle';
 import { useUser } from '../context/UserContext';
 import BubbleMenu from '../components/common/home/BubbleMenu';
-import { SectionSubtitle } from '../components/common/home/SectionSubtitle';
 import NoticeBoard from '../components/common/home/NoticeBoard';
 
 
