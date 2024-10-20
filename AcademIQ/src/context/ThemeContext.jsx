@@ -2,6 +2,7 @@ import React, { createContext, useState, useMemo, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../theme.js';
+import propTypes from 'prop-types';
 
 const ThemeContext = createContext();
 
@@ -37,3 +38,7 @@ export const ThemeProviderWrapper = ({ children }) => {
 export const useTheme = () => {
   return useContext(ThemeContext);
 };
+
+ThemeProviderWrapper.propTypes = {
+  children: propTypes.node,
+}

@@ -6,6 +6,7 @@ export const UserAvatar = ({image, size = "medium"}) => {
         small: { width: 50, height: 50 },
         medium: { width: 100, height: 100 },
         large: { width: 150, height: 150 },
+        xs:{ width: 30, height: 30 },
     };
 
     

@@ -2,22 +2,25 @@ import { useUser } from "../../../context/UserContext";
 import { Box, Tooltip, IconButton } from "@mui/material";
 import { useTheme } from "../../../context/ThemeContext";
 import { useState } from "react";
-import { GetVw, GetVh } from "../../../utils/GeneralHelpers";
+import { useNavigate } from "react-router-dom";
 
-const actions = [
-  { label: 'Grades', frequency: 5, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/a+plus.svg' },
-  { label: 'Schedule', frequency: 8, svg:  'https://academiq-assets.s3.eu-north-1.amazonaws.com/bell.svg' },
-  { label: 'Assignments', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/book+with+pencil.svg' },
-  { label: 'Calendar', frequency: 12, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/calendar+2.svg', },
-  { label: 'Performane', frequency: 8, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/gradeenvelope.svg' },
-  { label: 'My Profile', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/student.svg' },
-];
+
 
 export default function BubbleMenu() {
     const {user } = useUser();
     const {theme} = useTheme();
+    const navigate = useNavigate();
     
     const [hovered, setHovered] = useState(null);
+
+    const actions = [
+      { label: 'Grades', frequency: 5, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/a+plus.svg', path: '/grades' },
+      { label: 'Schedule', frequency: 8, svg:  'https://academiq-assets.s3.eu-north-1.amazonaws.com/bell.svg', path: '/schedule' },
+      { label: 'Assignments', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/book+with+pencil.svg', path: '/assignments' },
+      { label: 'Calendar', frequency: 12, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/calendar+2.svg', path: '/calendar' },
+      { label: 'Performane', frequency: 8, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/gradeenvelope.svg', path: '/performance' },
+      { label: 'My Profile', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/student.svg', path: '/profile' },
+    ];
 
     const getSize = (frequency) => {
       return {
@@ -40,9 +43,7 @@ export default function BubbleMenu() {
         padding: '20px',
         justifyContent: 'space-around',
         gap: '20px',
-        border: '2px solid #ccc',
         borderRadius: '10px',
-        backgroundColor: '#f9f9f9',
       }}
     >
       {actions.map((item, index) => (
@@ -50,6 +51,7 @@ export default function BubbleMenu() {
           <IconButton
             onMouseEnter={() => setHovered(index)}
             onMouseLeave={() => setHovered(null)}
+            onClick={() => navigate(item.path)}
             sx={{
               width: getSize(item.frequency),
               height: getSize(item.frequency),
@@ -67,17 +69,7 @@ export default function BubbleMenu() {
               }}
             />
           </IconButton>
-          <Box
-            sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              transition: 'opacity 0.3s',
-            }}
-          >
-            {item.label}
-          </Box>
+          
         </Tooltip>
       ))}
     </Box>

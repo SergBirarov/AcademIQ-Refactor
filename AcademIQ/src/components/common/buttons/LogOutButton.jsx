@@ -1,9 +1,16 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 export const LogOutButton = () => {
     return (
-        <Button size="large" >
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}>
+        <Button size="medium">
             Log Out
         </Button>
+        </Box>
+
     );
 }

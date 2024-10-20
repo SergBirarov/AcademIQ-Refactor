@@ -21,13 +21,7 @@ const studentMenuItems = [
 //     // { text: 'Logout', icon: <LogoutIcon /> },
 // ];
 
-const StyledBox = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    backgroundColor: theme.palette.background.paper,
-    width: '100%',
-    height: '100%',
-    padding:0
-}));
+
 
 
 //TODO: conditional rendering based on user role
@@ -41,25 +35,21 @@ export default function UserMenu() {
     }
 
         return(
-            <StyledBox>
                 <List>
                 {studentMenuItems.map((item, index) => (
                     <ListItem button key={index}
                     onClick={() => handleMenuClick(`/${item.text.toLowerCase()}`)}
                     sx={{ 
-                        display: 'flex', 
-                        alignItems: 'center',
                         '&:hover': { backgroundColor: theme.palette.secondary.light }, 
                         cursor: 'pointer' 
                     }}>
-                        <ListItemIcon sx={{ color: theme.palette.primary.main, mx: 0, mr: 2 }}>
+                        <ListItemIcon sx={{ color: theme.palette.primary.main }}>
                             {item.icon}
                         </ListItemIcon>
                         <ListItemText primary={item.text}  />
                     </ListItem>
                 ))}
             </List>
-            </StyledBox>
     
     )
 }

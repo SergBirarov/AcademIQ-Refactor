@@ -7,17 +7,17 @@ import { NoticeBoardCard } from "../NoticeBoardCard";
 
 const ScrollableBox = styled(Box)(({ theme }) => ({
   display: 'flex',
-  gap: theme.spacing(2),
-  overflowX: 'auto',
+  gap: theme.spacing(4),
+  overflowX: 'hidden',
   overflowY: 'hidden', // Prevent vertical overflow
   scrollSnapType: 'x mandatory',
   scrollBehavior: 'smooth',
-  maxWidth: '100%', 
+  maxWidth: '50%', 
   height: 'auto',
   '& > *': {
-    scrollSnapAlign: 'start',
+    scrollSnapAlign: 'revert',
     flexShrink: 0,
-    width: '300px', // Set card width
+    width: '240px', // Set card width
   },
 }));
 
@@ -59,26 +59,27 @@ const newsItems = [
 ]
 export default function NoticeBoard() {
 
-  const [notices, setNotices] = useState([]);
+  // const [notices, setNotices] = useState([]);
   const scrollRef = useRef(null);
 
-  useEffect(() => {
-    const fetchNotices = async () =>{
-      try{
-      const response = await fetch('http://misha-rn-test.somee.com/api/Notice');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log(data);
-      setNotices(data);
-    } catch(error){
-      console.error(error);
-    }
-  }
 
-    fetchNotices();
-  }, []);
+  // useEffect(() => {
+  //   const fetchNotices = async () =>{
+  //     try{
+  //     const response = await fetch('http://misha-rn-test.somee.com/api/Notice');
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     const data = await response.json();
+  //     console.log(data);
+  //     setNotices(data);
+  //   } catch(error){
+  //     console.error(error);
+  //   }
+  // }
+
+  //   fetchNotices();
+  // }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -98,30 +99,27 @@ export default function NoticeBoard() {
           });
         }
       }
-    }, 30000); // 30 seconds
+    }, 10000); // 30 seconds
 
     return () => clearInterval(interval);
   }, []);
 
 
   return (
-    <Box sx={{ padding: 4, width: '100%', display:'block' }}>
+    <>
+      <Box component={'header'}>
       <SectionTitle title="Your School's Latest News" />
       <SubSectionTitle title="Stay updated with the latest happenings at your school." />
-      
+      </Box>
+      <Box component={'section'} sx={{ display: 'flex', maxWidth: '100%', overflowX: 'hidden', position: 'relative',
+      }}>
       <ScrollableBox ref={scrollRef}>
-        {notices.map((item, index) => (
-          <NoticeBoardCard key={index} title={item.Title} date={item.PublishDate} preview={item.Preview} />
+        {newsItems.map((item, index) => (
+          <NoticeBoardCard key={index} title={item.title} date={item.date} preview={item.preview} />
         ))}
       </ScrollableBox>
-      {/* <Grid2 container spacing={4}>
-        <NoticeBoardCard title="School Closes" date="Today" preview="The school will close on Friday, 15th of June." />
-        {newsItems.map((item, index) => (
-          <Grid2 item xs={12} sm={6} md={2} key={index}>
-            <NoticeBoardCard title={item.title} date={item.date} preview={item.preview} />
-          </Grid2>
-        ))}
-      </Grid2> */}
-    </Box>
-  );
+
+      </Box>
+    </>
+  )
 }
