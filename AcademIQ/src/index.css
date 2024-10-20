@@ -27,3 +27,14 @@
     max-width: 120px !important;
     min-width: 120px !important;
   } */
+
+  html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    
+    scroll-padding-top: 3.5rem;
+
+    font-family: 'Rubik', sans-serif;
+    font-family: 'Alef', sans-serif;
+
+  }
