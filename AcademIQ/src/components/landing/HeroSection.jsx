@@ -13,7 +13,7 @@ export default function HeroSection() {
             component="img"
             src="https://academiq-assets.s3.eu-north-1.amazonaws.com/academiq-logo.png"
             alt="logo"
-            sx={{ width: { xs: GetVw(400), md: GetVw(500) } }} 
+            sx={{ width: { xs: GetVw(400), md: GetVw(500) } }}
           />
         </Grid2>
 
@@ -33,6 +33,6 @@ export default function HeroSection() {
         </Grid2>
       </Grid2>
     </>
-    
+
   );
 }

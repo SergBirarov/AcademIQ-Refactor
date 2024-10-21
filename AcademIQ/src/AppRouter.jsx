@@ -11,16 +11,22 @@ import Tuitions from './pages/admin/Tuitions';
 import Calendar from './pages/admin/Calendar';
 import GeneralInformation from './pages/admin/GeneralInformation';
 import HomeStaff from './pages/admin/HomeStaff';
+import Attendance from './pages/Attendance';
+import Settings from './pages/Settings';
+import ForgotPassword from './pages/ForgotPassword';
+import PasswordReset from './pages/PasswordReset';
 
 
 
 const AppRouter = () => {
 
-    return (
-      <Router>
+  return (
+    <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/passwordreset" element={<PasswordReset />} />
         <Route element={<HomeLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/overview" element={<HomeStaff />} />
@@ -32,10 +38,13 @@ const AppRouter = () => {
           <Route path="/calendar" element={<Calendar />} />
           <Route path='/general information' element={<GeneralInformation />} />
           
+          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/settings" element={<Settings />} />
+
         </Route>
       </Routes>
     </Router>
-    );
-  };
+  );
+};
 
-  export default AppRouter;
+export default AppRouter;

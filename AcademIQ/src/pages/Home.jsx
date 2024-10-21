@@ -10,6 +10,11 @@ import NoticeBoard from '../components/common/home/NoticeBoard';
 
 export default function Home() {
     const { user } = useUser();
+    console.log("user");
+    console.log(user);
+
+
+
     return (
         <>
         <Box
