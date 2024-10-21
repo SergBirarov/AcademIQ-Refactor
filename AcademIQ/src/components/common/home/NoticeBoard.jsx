@@ -1,4 +1,4 @@
-import { Box, Grid2, Typography, Card, CardContent, Button } from "@mui/material";
+import { Box, Grid2, Typography, Card, CardContent, Button, Stack } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { GetVw, GetVh } from "../../../utils/GeneralHelpers";
 import styled from '@emotion/styled';
@@ -106,13 +106,12 @@ export default function NoticeBoard() {
 
 
   return (
-    <>
+    <Stack>
       <Box component={'header'}>
       <SectionTitle title="Your School's Latest News" />
       <SubSectionTitle title="Stay updated with the latest happenings at your school." />
       </Box>
-      <Box component={'section'} sx={{ display: 'flex', maxWidth: '100%', overflowX: 'hidden', position: 'relative',
-      }}>
+      <Box component={'section'} sx={{ display: 'flex', maxWidth: '100%', overflowX: 'hidden', position: 'relative', justifyContent: 'center' }}>
       <ScrollableBox ref={scrollRef}>
         {newsItems.map((item, index) => (
           <NoticeBoardCard key={index} title={item.title} date={item.date} preview={item.preview} />
@@ -120,6 +119,6 @@ export default function NoticeBoard() {
       </ScrollableBox>
 
       </Box>
-    </>
+    </Stack>
   )
 }

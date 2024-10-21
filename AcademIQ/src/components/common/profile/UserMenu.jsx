@@ -3,8 +3,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import GradeIcon from '@mui/icons-material/Grade';
+import LogoutIcon from '@mui/icons-material/Logout';
 import theme from "../../../theme.js";
 import { useNavigate } from 'react-router-dom';
+import HailOutlinedIcon from '@mui/icons-material/HailOutlined';
+import AssuredWorkloadOutlinedIcon from '@mui/icons-material/AssuredWorkloadOutlined';
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import SpatialAudioOffOutlinedIcon from '@mui/icons-material/SpatialAudioOffOutlined';
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+import { useUser } from '../../../context/UserContext.jsx';
+
 
 const studentMenuItems = [
     { text: 'Home', icon: <HomeIcon /> },
@@ -14,12 +22,14 @@ const studentMenuItems = [
     // { text: 'Logout', icon: <LogoutIcon /> },
 ];
 
-// const professorMenuItems = [
-//     { text: 'Dashboard', icon: <HomeIcon /> },
-//     { text: 'Manage Courses', icon: <AssignmentIcon /> },
-//     { text: 'Settings', icon: <SettingsIcon /> },
-//     // { text: 'Logout', icon: <LogoutIcon /> },
-// ];
+const staffMenuItems = [
+    { text: 'Overview', icon: <HomeIcon /> },
+    { text: 'Manage Students And Staff', icon: <HailOutlinedIcon /> },
+    { text: 'Manage Tuitions', icon: <AssuredWorkloadOutlinedIcon /> },
+    { text: 'Calendar', icon: <CalendarMonthOutlinedIcon /> },
+    { text: 'Notices', icon: <SpatialAudioOffOutlinedIcon /> },
+    { text: 'General Information', icon: <BarChartOutlinedIcon /> },
+];
 
 
 
@@ -28,15 +38,19 @@ const studentMenuItems = [
 
 export default function UserMenu() {
 
+    const { user } = useUser();
+
     const navigate = useNavigate();
 
+    const renderMenu = user?.role_code == '3'? studentMenuItems : staffMenuItems; 
     const handleMenuClick = (path) => {
         navigate(path);
     }
 
         return(
+            <Box component={'nav'} sx={{ height: '50%', display: 'flex' }}>
                 <List>
-                {studentMenuItems.map((item, index) => (
+                {renderMenu.map((item, index) => (
                     <ListItem button key={index}
                     onClick={() => handleMenuClick(`/${item.text.toLowerCase()}`)}
                     sx={{ 
@@ -50,6 +64,7 @@ export default function UserMenu() {
                     </ListItem>
                 ))}
             </List>
+            </Box>
     
     )
 }

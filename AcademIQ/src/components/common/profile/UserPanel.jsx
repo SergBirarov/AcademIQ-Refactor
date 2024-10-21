@@ -11,7 +11,11 @@ export default function UserPanel(){
         )}
 
     return(
-        <Card>
+        <Card sx={{ height: '30%', width: '100%', borderRadius: '0', border: 'none', boxShadow: 'none',
+            backgroundColor: 'transparent',
+            backdropFilter: 'blur(5px)',
+            
+          }}>
                 <CardContent>
 
                             <Box sx={{

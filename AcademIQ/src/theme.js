@@ -14,7 +14,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#40E0D0', 
-      contrastText: '#FF7F50', 
+      contrastText: '#1C2833', 
     },
     accent: {
       main: '#FFD700', 

@@ -28,35 +28,62 @@ export default function Profile() {
     }));
 
     const InfoCard = styled(Paper)(({ theme }) => ({
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         marginBottom: theme.spacing(2),
         boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-        borderRadius: '8px',
+        borderRadius: '16px',
     }));
 
     const handleTabChange = (event, newValue) => {
         setTab(newValue);
     };
     return (
-        <Container component={'section'} sx={{ display: 'flex', flexDirection: 'row', maxWidth: '100%', height: '100%', minWidth: '100%'}}>
+        <Container component={'section'} sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', maxWidth: '100%', height: '100%', minWidth: '100%'}}>
             <StyledContainer>
                 <Tabs value={tab} onChange={handleTabChange}>
                     <Tab label="Your Contact Info" />
                     <Tab label="Tuition Control" />
                     <Tab label="Update Us" />
                 </Tabs>
+                <Box component={'div'} sx={{ textAlign: 'center', padding: 2, mt: 2 }}>
+                                <Avatar src={user?.picture_URL} sx={{ width: 120, height: 120, margin: 'auto', mb: 2, border: '2px solid black' }} />
+                                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{user?.firstName} {user?.lastName}</Typography>
+                            </Box>
 
                 <Box sx={{ paddingTop: 2 }}>
                     {tab === 0 && (
                         
                         <>
-                        <Box component={'div'} sx={{ textAlign: 'center' }}>
-                                <Avatar src={user?.picture_URL} sx={{ width: 120, height: 120, margin: 'auto', mb: 2, border: '2px solid black' }} />
-                                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{user?.firstName} {user?.lastName}</Typography>
-                            </Box>
+                       
 
                             <Grid2 container spacing={2}>
+
                                 <Grid2 item xs={12} sm={6}>
+                                    <Box component={'div'}>
+                                        <InfoCard sx={{ padding: 2,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            
+                                         }}>
+                                            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>Contact Information</Typography>
+                                            <Typography variant="body1"><strong>Email:</strong> {user?.email}</Typography>
+                                            <Typography variant="body1"><strong>Phone:</strong> {user?.phone}</Typography>
+                                            <Typography variant="body1"><strong>Address:</strong> {user?.address}</Typography>
+                                        </InfoCard>
+                                        <InfoCard sx={{ padding: 2,
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            
+                                         }}>
+                                            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>Contact Information</Typography>
+                                            <Typography variant="body1"><strong>Email:</strong> {user?.email}</Typography>
+                                            <Typography variant="body1"><strong>Phone:</strong> {user?.phone}</Typography>
+                                            <Typography variant="body1"><strong>Address:</strong> {user?.address}</Typography>
+                                        </InfoCard>
+                                    </Box>
+                                    </Grid2>
+                                {/* <Grid2 item xs={12} sm={6}>
+
                                     <InfoCard>
                                         <Typography variant="body1"><strong>Email:</strong> {user?.email}</Typography>
                                     </InfoCard>
@@ -70,7 +97,7 @@ export default function Profile() {
                                     <InfoCard>
                                         <Typography variant="body1"><strong>Address:</strong> {user?.address}</Typography>
                                     </InfoCard>
-                                </Grid2>
+                                </Grid2> */}
                             </Grid2> 
                         </>
                         
@@ -99,7 +126,7 @@ export default function Profile() {
                     )}
                 </Box>
             </StyledContainer>
-            <Container component={'section'} maxWidth='300' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <Container component={'section'} maxWidth='300' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 0 }}>
                 <Lottie animationData={animation} loop={true} style ={{ height: 300, width: 300 }} />
                 <Typography variant="h5" component="h5" sx={{ mt: 3 }} align="center">Welcome to your profile!</Typography>
                 <Typography variant="body1" component="p" sx={{ mt: 3 }} align="center">Here you can see your contact info<br></br> and update us on any changes!</Typography>

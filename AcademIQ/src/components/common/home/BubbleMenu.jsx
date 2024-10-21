@@ -20,6 +20,7 @@ export default function BubbleMenu() {
       { label: 'Calendar', frequency: 12, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/calendar+2.svg', path: '/calendar' },
       { label: 'Performane', frequency: 8, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/gradeenvelope.svg', path: '/performance' },
       { label: 'My Profile', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/student.svg', path: '/profile' },
+      { label: 'Courses', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/student.svg', path: '/profile' },
     ];
 
     const getSize = (frequency) => {
@@ -36,14 +37,12 @@ export default function BubbleMenu() {
       sx={{
         position: 'relative',
         display: 'flex',
-        flexWrap: 'wrap',
         alignItems: 'center',
         width: '100%',
         height: '100%',
         padding: '20px',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         gap: '20px',
-        borderRadius: '10px',
       }}
     >
       {actions.map((item, index) => (

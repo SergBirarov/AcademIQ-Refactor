@@ -19,8 +19,8 @@ export default function DesktopDrawer() {
 
     return (
         <>
-        <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+        {/* <Box sx={{ display: 'flex' }}>
+      <CssBaseline /> */}
       <Drawer
         sx={{
           
@@ -29,6 +29,9 @@ export default function DesktopDrawer() {
             maxWidth: drawerWidth,
             boxSizing: 'border-box',
             position: 'relative',
+            borderRadius: '16px',
+            backgroundColor: 'transparent',
+            backdropFilter: 'blur(5px)',
           },
         }}
         variant="permanent"
@@ -41,10 +44,10 @@ export default function DesktopDrawer() {
 <LogOutButton />
       </Drawer>
       
-<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+{/* <Box component="main" sx={{ display: 'flex', position: 'relative', flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
         <Outlet/>
-      </Box>
-      </Box>
+      </Box> */}
+      {/* </Box> */}
       </>
     )
 }

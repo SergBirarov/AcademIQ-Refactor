@@ -53,7 +53,7 @@ export default function MobileDrawer() {
     const theme = useTheme();
 
     return (
-        <Box sx={{ display: 'flex', flexGrow: 0 }}>
+        // <Box sx={{ display: 'flex', flexGrow: 0 }}>
       <Drawer variant="permanent" sx={{ 
         '& .MuiDrawer-paper': {
             width: drawerWidth,
@@ -93,9 +93,9 @@ export default function MobileDrawer() {
         <Button variant='outlined' sx={{ width: '100%', position: 'absolute', bottom: '10px', minWidth:0}}>
             <LogoutIcon/> </Button>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Outlet/>
-      </Box>
-    </Box>
+      // <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      //   <Outlet/>
+      // </Box>
+    // </Box>
     )
 }
