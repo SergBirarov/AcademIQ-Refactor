@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const studentMenuItems = [
     { text: 'Home', icon: <HomeIcon /> },
     { text: 'Profile', icon: <AssignmentIcon /> },
-    { text:'Performence', icon: <GradeIcon /> },
+    { text:'Performance', icon: <GradeIcon /> },
     { text: 'Settings', icon: <SettingsIcon /> },
     // { text: 'Logout', icon: <LogoutIcon /> },
 ];

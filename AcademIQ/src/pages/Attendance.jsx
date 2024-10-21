@@ -14,7 +14,7 @@ export default function Attendance({ lessonId }) {
     const [students, setStudents] = useState();
     const { user } = useUser();
     const [selectedDate, setSelectedDate] = useState(dayjs());
-
+    const API_URL = `http://www.Misha-RN-Test.somee.com/api`;
 
 
     useEffect(() => {
@@ -40,17 +40,19 @@ export default function Attendance({ lessonId }) {
         ];
         setStudents(studentsData);
 
-    }, [])
+    }, []);
 
     const handleCheckboxChange = async (studentId, isChecked) => {
         try {
             if (isChecked) {
 
                 // Send data to server
-                const response = await fetch('API_URL', {
+                const response = await fetch(`${API_URL}`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
                     },
                     body: JSON.stringify({
                         StudentId: studentId,
@@ -64,10 +66,12 @@ export default function Attendance({ lessonId }) {
             }
             else {
                 // Send data to server
-                const response = await fetch(`API_URL?studentId=${studentId}&lessonId=${lessonId}&lessonDate=${selectedDate.format('YYYY-MM-DD')}`, {
+                const response = await fetch(`${API_URL}?studentId=${studentId}&lessonId=${lessonId}&lessonDate=${selectedDate.format('YYYY-MM-DD')}`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`
                     },
                 });
                 const data = await response.json();

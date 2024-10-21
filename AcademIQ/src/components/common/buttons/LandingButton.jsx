@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function LandingButton({ text }) {
+  const nav = useNavigate();
   return (
-    <Button variant="contained" size="large" sx={{ mx: 2 }}>
+    <Button variant="contained" size="large" sx={{ mx: 2 }} onClick={() => { nav("/login") }}> 
       {text}
-    </Button>
+    </Button>//TODO
   );
 }

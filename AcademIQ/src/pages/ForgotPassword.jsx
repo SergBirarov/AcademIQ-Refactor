@@ -1,15 +1,14 @@
-import Layout from '../layouts/GeneralContainer'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography, Container
+} from "@mui/material";
+
 import styled from '@emotion/styled'
-import { WidthFull } from '@mui/icons-material';
-import { Box, Container, Typography, TextField, Button } from '@mui/material';
-import { GetVw, GetVh } from '../utils/GeneralHelpers';
-import { useUser } from '../context/UserContext';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import InputAdornment from "@mui/material/InputAdornment";
-import FilledInput from "@mui/material/FilledInput";
+
 
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -29,44 +28,41 @@ const StyledBox = styled(Box)(({ theme }) => ({
   },
 }))
 
-const Login = ({ onForgotPassword }) => {
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+const ForgotPasswordFun = () => {
+
+  const [email, setEmail] = useState("")
+  const [id, setId] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const { setUser } = useUser();
 
-  // const handleMouseDownPassword = (event) => {
-  //   event.preventDefault();
-  // };
+  const handleSubmit = async (e) => {
+    console.log("Email sent to", email, id)
 
-  // const handleMouseUpPassword = (event) => {
-  //   event.preventDefault();
-  // };
-
-  const handleSubmit = async () => {
     setErrorMessage("");
-    if (userId.trim() === "" || password.trim() === "") {
+    if (email.trim() === "" || id.trim() === "") {
       setErrorMessage("ID and password are required.");
       return;
     }
 
+    if (!emailRegex.test(email)) {
+      setErrorMessage("Invalid email address.");
+      return;
+    }
+
     try {
-      const response = await fetch('http://misha-rn-test.somee.com/api/User/login', {
+      const response = await fetch('http://misha-rn-test.somee.com/api/Password/reset-request', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          id: userId,
-          email: "",
-          password: password,
+          email: email,
+          id: id,
         }),
         cache: 'no-cache',
       });
@@ -74,24 +70,25 @@ const Login = ({ onForgotPassword }) => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        const userData = data.userData || data.user;
-
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(userData));
-        setUser(userData);
-        // window.location.href = "/home";
-        navigate("/home")
+        navigate("/")
 
       } else {
         const errorData = await response.json();
         console.log('Error:', errorData);
-        setErrorMessage("Invalid ID or password. Please try again.");
+        setErrorMessage("ID and password are required.");
+        console.log(errorData);
+
       }
     } catch (error) {
       console.error('Error fetching data:', error);
       setErrorMessage("An error occurred. Please try again.");
+      console.log(error);
     }
   };
+
+
+
+
 
   return (
     <StyledBox>
@@ -105,10 +102,10 @@ const Login = ({ onForgotPassword }) => {
         }}
       />
       <Typography variant="h3" gutterBottom>
-        Login
+        שחזור סיסמא
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        Please enter your ID and password to log in
+        הזן את מספר הזהות וכתובת המייל כדי לקבל קוד לשחזור הססמא
       </Typography>
       <TextField
         fullWidth
@@ -118,43 +115,43 @@ const Login = ({ onForgotPassword }) => {
         onChange={(event) => {
           const value = event.target.value;
           const numericValue = value.replace(/\D/g, '');
-          setUserId(numericValue);
+          setId(numericValue);
         }}
-        value={userId}
+        value={id}
       />
       <TextField
         fullWidth
         margin="normal"
-        label="Password"
+        label="Email"
         variant="outlined"
-        type="password"
-        onChange={(event) => setPassword(event.target.value)}
-        value={password}
+        type="Email"
+        onChange={(event) => {
+          const value = event.target.value;
+          const englishOnlyValue = value.replace(/[^0-9a-zA-Z@._-]/g, '');
+          setEmail(englishOnlyValue);
+        }}
+        value={email}
       />
-      {errorMessage && ( // Отображение сообщения об ошибке, если оно есть
+      {errorMessage && (
         <Typography color="error" sx={{ mt: 2 }}>
           {errorMessage}
         </Typography>
       )}
       <Box mt={2}>
         <Button variant="contained" size='large' onClick={handleSubmit}>
-          Log In
+          Sent Link
         </Button>
-        <Button variant="text" size='large' onClick={() => navigate("/forgot-password")} >
-          Forgot Password?
+        <Button variant="text" size='large' onClick={() => navigate("/login")} >
+          Log In
         </Button>
       </Box>
     </StyledBox>
   )
 }
-export default function LoginPage() {
-
-
-
-
+export default function ForgotPassword() {
   return (
     <Container component={'main'} sx={{ mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Login />
+      <ForgotPasswordFun />
     </Container>
   )
 }
