@@ -22,7 +22,7 @@ export default function HomeLayout() {
     marginTop: '5vh',
     borderRadius: '16px',
     boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
-    background: `linear-gradient(135deg, ${theme.palette.secondary.main} 50%, ${theme.palette.primary.light} 50%)`,
+    background: `linear-gradient(135deg, ${theme.palette.secondary.light} 60%, ${theme.palette.primary.light} 60%)`,
     animation: 'moveBackground 8s infinite alternate',
     '@keyframes moveBackground': {
       '0%': {

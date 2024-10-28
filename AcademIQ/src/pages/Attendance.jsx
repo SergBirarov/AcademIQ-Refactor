@@ -8,6 +8,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+import propTypes from 'prop-types';
 
 export default function Attendance({ lessonId }) {
 
@@ -139,4 +140,9 @@ export default function Attendance({ lessonId }) {
             </MDBTable>
         </Box>
     );
+}
+
+
+Attendance.propTypes = {
+    lessonId: propTypes.int,
 }

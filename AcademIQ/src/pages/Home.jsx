@@ -1,53 +1,86 @@
-import { Typography, Container, Grid2, Box } from '@mui/material'
-import { GetVw, GetVh } from '../utils/GeneralHelpers';
+import {  Container, Grid2, Box } from '@mui/material'
 import { SectionTitle, SubSectionTitle } from '../components/common/SectionTitle';
 import { useUser } from '../context/UserContext';
 import BubbleMenu from '../components/common/home/BubbleMenu';
-import NoticeBoard from '../components/common/home/NoticeBoard';
+// import NoticeBoard from '../components/common/home/NoticeBoard';
+import QuickActionsCourses from '../components/common/home/QuickActionsCourses';
+import theme from '../theme';
+import styled from '@emotion/styled';
 
+const MainContainer = styled(Container)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    maxHeight:'90vh',
+    width: '100%',
+    minHeight: '90vh',
+  }));
 
 
 
 export default function Home() {
     const { user } = useUser();
-    console.log("user");
-    console.log(user);
-
 
 
     return (
         <>
-        <Box
+        <MainContainer>
+          <Box component={'header'} sx={{height: '10vh', width: '100%'}}> 
+          <SectionTitle title="Welcome to your Dashboard!" />
+          </Box>
+          <Box component={'section'} sx={{
+            display: 'flex',
+            width: '20vw',
+            maxWidth: '310vw',
+            minWidth: '100%',
+            height: '30vh',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+            borderRadius: '16px',
+
+          }}>
+            <BubbleMenu />
+          </Box>
+
+          <Box component={'section'} >
+            <QuickActionsCourses/>
+          </Box>
+        </MainContainer>
+        {/* <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'flex-start',
-            padding: '20px',
-            gap: '30px', // Adds spacing between elements
+            justifyContent:'space-between',
+            height: '100%',
+            padding: theme.spacing(3),
+            gap: '50px', // Adds spacing between elements
             width: '100%',
           }}
         >
-          {/* Header */}
           <Box component="header" sx={{ width: '100%', textAlign: 'center' }}>
             <SectionTitle title="Welcome to your Dashboard!" />
           </Box>
   
-          {/* Bubble Menu */}
           <Box
             component="section"
             sx={{
               display: 'flex',
-              position: 'relative',
-              justifyContent: 'center',
-              alignSelf: 'center',
-              width: '60%',
+              justifyContent: 'space-evenly',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              flexDirection: 'row',
+              backdropFilter: 'blur(5px)',
+              height: '210px',
+              padding: theme.spacing(3),
+              width: '500px',
+
             }}
           >
             <BubbleMenu />
           </Box>
   
-          {/* Notice Board */}
           <Box
             component="section"
             sx={{
@@ -56,9 +89,9 @@ export default function Home() {
               width: '100%',
             }}
           >
-            <NoticeBoard />
+            <QuickActionsCourses />
           </Box>
-        </Box>
+        </Box> */}
       </>
         // <>
         // <Grid2 container spacing={3}>

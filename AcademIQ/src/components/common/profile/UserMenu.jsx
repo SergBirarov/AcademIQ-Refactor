@@ -50,7 +50,7 @@ export default function UserMenu() {
         return(
             <Box component={'nav'} sx={{ height: '50%', display: 'flex' }}>
                 <List>
-                {renderMenu.map((item, index) => (
+                {studentMenuItems.map((item, index) => (
                     <ListItem button key={index}
                     onClick={() => handleMenuClick(`/${item.text.toLowerCase()}`)}
                     sx={{ 

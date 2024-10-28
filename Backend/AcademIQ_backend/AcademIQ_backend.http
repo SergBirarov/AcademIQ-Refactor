@@ -1,0 +1,6 @@
+@AcademIQ_backend_HostAddress = http://localhost:5173
+
+GET {{AcademIQ_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

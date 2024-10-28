@@ -17,9 +17,10 @@
   body{
     background: linear-gradient(135deg, #268cf1, #40E0D0, #FFD700);
     background-size: 400% 400%;
-    animation: gradientShift 30s ease infinite;
+    animation: gradientShift 90s ease infinite;
   }
 
+  
 
 
   /* .css-5qtq01-MuiDrawer-docked .MuiDrawer-paper{

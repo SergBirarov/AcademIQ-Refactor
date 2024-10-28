@@ -4,7 +4,6 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import BookIcon from '@mui/icons-material/Book';
 import AssignmentIcon from '@mui/icons-material/Book';
-// import EmailIcon from '@mui/icons-material/EmailIcon';
 import theme from '../theme';
 
 const CourseCard = styled(Card)(({ theme }) => ({

@@ -22,6 +22,10 @@ const ScrollableBox = styled(Box)(({ theme }) => ({
 }));
 
 
+//TODO: להוסיף את הקוד האחורי להוציא את המודעות מהדאטה בייס 
+// להוסיף בעמוד של אדמין הוספה של ידיעה חדשה בעמוד NoticesManagement
+
+
 const newsItems = [
     {
       title: "School Closes",
@@ -59,27 +63,27 @@ const newsItems = [
 ]
 export default function NoticeBoard() {
 
-  // const [notices, setNotices] = useState([]);
+  const [notices, setNotices] = useState([]);
   const scrollRef = useRef(null);
 
 
-  // useEffect(() => {
-  //   const fetchNotices = async () =>{
-  //     try{
-  //     const response = await fetch('http://misha-rn-test.somee.com/api/Notice');
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     console.log(data);
-  //     setNotices(data);
-  //   } catch(error){
-  //     console.error(error);
-  //   }
-  // }
+  useEffect(() => {
+    const fetchNotices = async () =>{
+      try{
+      const response = await fetch('http://misha-rn-test.somee.com/api/Notice');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      setNotices(data);
+    } catch(error){
+      console.error(error);
+    }
+  }
 
-  //   fetchNotices();
-  // }, []);
+    fetchNotices();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -113,7 +117,7 @@ export default function NoticeBoard() {
       </Box>
       <Box component={'section'} sx={{ display: 'flex', maxWidth: '100%', overflowX: 'hidden', position: 'relative', justifyContent: 'center' }}>
       <ScrollableBox ref={scrollRef}>
-        {newsItems.map((item, index) => (
+        {notices.map((item, index) => (
           <NoticeBoardCard key={index} title={item.title} date={item.date} preview={item.preview} />
         ))}
       </ScrollableBox>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\AcademIQ_backend.props" />
+</Project>

@@ -1,6 +1,6 @@
 import { useUser } from "../../../context/UserContext";
-import { Box, Tooltip, IconButton } from "@mui/material";
-import { useTheme } from "../../../context/ThemeContext";
+import { Box, Tooltip, IconButton, Grid2 } from "@mui/material";
+import  theme  from "../../../theme";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function BubbleMenu() {
     const {user } = useUser();
-    const {theme} = useTheme();
     const navigate = useNavigate();
     
     const [hovered, setHovered] = useState(null);
@@ -23,39 +22,78 @@ export default function BubbleMenu() {
       { label: 'Courses', frequency: 3, svg: 'https://academiq-assets.s3.eu-north-1.amazonaws.com/student.svg', path: '/profile' },
     ];
 
-    const getSize = (frequency) => {
-      return {
-        xs: `${40 + frequency * 3}px`, // for extra small screens
-        sm: `${50 + frequency * 4}px`, // for small screens
-        md: `${60 + frequency * 5}px`, // for medium screens
-        lg: `${70 + frequency * 6}px`, // for large screens
-        xl: `${80 + frequency * 7}px`, // for extra large screens
-      };
-    };
+    // //for different screen sizes 
+    // const getSize = (frequency) => {
+    //   return {
+    //     xs: `${40 + frequency * 3}px`, 
+    //     sm: `${50 + frequency * 4}px`, 
+    //     md: `${60 + frequency * 5}px`, 
+    //     lg: `${70 + frequency * 6}px`,
+    //     xl: `${80 + frequency * 7}px`, 
+    //   };
+    // };
     return(
-        <Box
-      sx={{
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        padding: '20px',
-        justifyContent: 'space-between',
-        gap: '20px',
-      }}
-    >
-      {actions.map((item, index) => (
-        <Tooltip title={item.label} key={index}>
+      <>
+
+<Box sx={{ width: '100%', height: '200vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: theme.spacing(3) }}>
+      <Grid2 container spacing={2}  sx={{display: 'flex', columnGap: 6, justifyContent: 'space-evenly', alignItems: 'space-evenly'}} >
+        {actions.map((item, index) => (
+          <Grid2 item xs={6} sm={4} md={3} key={index} >
+            <Tooltip title={item.label}>
+              <IconButton
+                onMouseEnter={() => setHovered(index)}
+                onMouseLeave={() => setHovered(null)}
+                onClick={() => navigate(item.path)}
+                sx={{
+                  width: hovered === index ? '90px' : '70px',
+                  height: hovered === index ? '90px' : '70px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  // justifyContent: 'space-evenly',
+                  // alignItems: 'space-evenly',
+                  transition: 'transform 0.3s ease', // Smooth transform on hover
+                  transform: hovered === index ? 'scale(1.2)' : 'scale(1)',
+                  backgroundColor: hovered === index ? theme.palette.secondary.light : 'transparent',
+                  '&:hover': {
+                    backgroundColor: theme.palette.secondary.light,
+                  }
+                }}
+              >
+                <Box
+                  component="img"
+                  src={item.svg}
+                  alt={item.label}
+                  sx={{ width: '100%', height: 'auto', mb: 1 }}
+                />
+                <Box component="span" sx={{ fontSize: 12, color: theme.palette.primary.text, fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center' }}>
+                  {item.label}
+                </Box>
+              </IconButton>
+            </Tooltip>
+          </Grid2>
+        ))}
+      </Grid2>
+    </Box>
+      
+      {/* {actions.map((item, index) => (
+        <Tooltip title={item.label} key={index} >
           <IconButton
             onMouseEnter={() => setHovered(index)}
             onMouseLeave={() => setHovered(null)}
             onClick={() => navigate(item.path)}
             sx={{
-              width: getSize(item.frequency),
-              height: getSize(item.frequency),
+              width: '40%',
+              height: '40%',
+              display: 'flex',
+              // justifyContent: 'center',
+              flexDirection: 'column',
+              // alignItems: 'center',
               transition: 'width 0.3s, height 0.3s',
-              backgroundColor: hovered === index ? 'primary.main' : 'background.paper',
+              '&: hover':{
+                width: '50%',
+                height: '50%',
+
+              }
             }}
           >
             <Box
@@ -63,15 +101,21 @@ export default function BubbleMenu() {
               src={item.svg}
               alt={item.label}
               sx={{
-                width: '100%',
+                maxWidth: '100%',
+                minWidth: '100%',
                 height: '100%',
+                maxHeight: '100%',
+                transition: 'width 0.3s, height 0.3s',
+
+
               }}
-            />
+            >
+              </Box>
+          {item.label}
           </IconButton>
-          
         </Tooltip>
-      ))}
-    </Box>
+      ))} */}
+      </>
     )
 
 }
