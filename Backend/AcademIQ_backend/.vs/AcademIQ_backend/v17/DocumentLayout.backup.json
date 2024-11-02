@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\users\\userprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\userprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\requestmodels\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\requestmodels\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\requestmodels\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\requestmodels\\applicationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\requestmodels\\myregisterrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,36 +43,24 @@
       "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\students.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\users\\userprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\userprofileresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\requestmodels\\myloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\requestmodels\\myloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\users\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\users\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\users\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\users\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\coursesall\\courses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\coursesall\\courses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\examsassignments\\activestudentexamgrades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\examsassignments\\activestudentexamgrades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|c:\\users\\sergb\\onedrive\\documents\\github\\academiq-refactor\\backend\\academiq_backend\\models\\requestmodels\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE1C4149-01DE-4EDB-AF7A-A3039D73B3D6}|AcademIQ_backend.csproj|solutionrelative:models\\requestmodels\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 167,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -74,172 +82,190 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "StudentController.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\StudentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\StudentController.cs",
-              "RelativeToolTip": "Controllers\\StudentController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwD0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T20:05:10.553Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserProfileResponse.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\UserProfileResponse.cs",
-              "RelativeDocumentMoniker": "Models\\Users\\UserProfileResponse.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\UserProfileResponse.cs",
-              "RelativeToolTip": "Models\\Users\\UserProfileResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T18:02:54.198Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Staff.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Staff.cs",
-              "RelativeDocumentMoniker": "Models\\Users\\Staff.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Staff.cs",
-              "RelativeToolTip": "Models\\Users\\Staff.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T17:14:27.111Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AuthenticationController.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\AuthenticationController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthenticationController.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\AuthenticationController.cs",
-              "RelativeToolTip": "Controllers\\AuthenticationController.cs",
-              "ViewState": "AgIAAKkAAAAAAAAAAAAkwLcAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T16:46:52.406Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAFAAAAAAAAAAAAAjwFsAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T16:45:35.3Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Courses.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\CoursesAll\\Courses.cs",
-              "RelativeDocumentMoniker": "Models\\CoursesAll\\Courses.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\CoursesAll\\Courses.cs",
-              "RelativeToolTip": "Models\\CoursesAll\\Courses.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBsAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T16:42:15.719Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Students.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Students.cs",
-              "RelativeDocumentMoniker": "Models\\Users\\Students.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Students.cs",
-              "RelativeToolTip": "Models\\Users\\Students.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAiwBIAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T10:59:50.058Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MyRegisterRequest.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\MyRegisterRequest.cs",
-              "RelativeDocumentMoniker": "Models\\RequestModels\\MyRegisterRequest.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\MyRegisterRequest.cs",
-              "RelativeToolTip": "Models\\RequestModels\\MyRegisterRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T11:32:37.068Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\User.cs",
               "RelativeDocumentMoniker": "Models\\Users\\User.cs",
               "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\User.cs",
               "RelativeToolTip": "Models\\Users\\User.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAowBAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T13:38:58.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-29T12:33:30.365Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "Data\\AppDbContext.cs",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAhwJQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T10:44:31.068Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MyLoginRequest.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\MyLoginRequest.cs",
-              "RelativeDocumentMoniker": "Models\\RequestModels\\MyLoginRequest.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\MyLoginRequest.cs",
-              "RelativeToolTip": "Models\\RequestModels\\MyLoginRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T11:16:39.233Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Roles.cs",
               "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Roles.cs",
               "RelativeDocumentMoniker": "Models\\Users\\Roles.cs",
               "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Roles.cs",
               "RelativeToolTip": "Models\\Users\\Roles.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T11:17:20.231Z",
+              "WhenOpened": "2024-10-29T12:33:24.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MyRegisterRequest.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\MyRegisterRequest.cs",
+              "RelativeDocumentMoniker": "Models\\RequestModels\\MyRegisterRequest.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\MyRegisterRequest.cs",
+              "RelativeToolTip": "Models\\RequestModels\\MyRegisterRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:33:12.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApplicationRole.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\ApplicationRole.cs",
+              "RelativeDocumentMoniker": "Models\\RequestModels\\ApplicationRole.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\ApplicationRole.cs",
+              "RelativeToolTip": "Models\\RequestModels\\ApplicationRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:14:39.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "Models\\RequestModels\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\ApplicationUser.cs",
+              "RelativeToolTip": "Models\\RequestModels\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:13:54.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegisterController.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\RegisterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RegisterController.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\RegisterController.cs",
+              "RelativeToolTip": "Controllers\\RegisterController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:10:18.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:01:29.004Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "Instructor.cs",
-              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Instructor.cs",
-              "RelativeDocumentMoniker": "Models\\Users\\Instructor.cs",
-              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Instructor.cs",
-              "RelativeToolTip": "Models\\Users\\Instructor.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAAA4AAAAXAAAAAAAAAA==",
+              "Title": "Students.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Students.cs",
+              "RelativeDocumentMoniker": "Models\\Users\\Students.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\Students.cs",
+              "RelativeToolTip": "Models\\Users\\Students.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAswAsAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-26T11:00:06.798Z",
+              "WhenOpened": "2024-10-29T12:03:06.434Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwBoAAAAqAQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T18:07:18.467Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthenticationController.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAYwLYBAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T11:42:49.31Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-29T10:55:49.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Controllers\\LoginController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T19:26:20.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Register.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\Register.cs",
+              "RelativeDocumentMoniker": "Models\\RequestModels\\Register.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\RequestModels\\Register.cs",
+              "RelativeToolTip": "Models\\RequestModels\\Register.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T11:05:37.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserProfileResponse.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\UserProfileResponse.cs",
+              "RelativeDocumentMoniker": "Models\\Users\\UserProfileResponse.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\Users\\UserProfileResponse.cs",
+              "RelativeToolTip": "Models\\Users\\UserProfileResponse.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAnwDEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:33:35.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ActiveStudentExamGrades.cs",
+              "DocumentMoniker": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\ExamsAssignments\\ActiveStudentExamGrades.cs",
+              "RelativeDocumentMoniker": "Models\\ExamsAssignments\\ActiveStudentExamGrades.cs",
+              "ToolTip": "C:\\Users\\sergb\\OneDrive\\Documents\\GitHub\\AcademIQ-Refactor\\Backend\\AcademIQ_backend\\Models\\ExamsAssignments\\ActiveStudentExamGrades.cs",
+              "RelativeToolTip": "Models\\ExamsAssignments\\ActiveStudentExamGrades.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-29T12:00:23.797Z"
             }
           ]
         }

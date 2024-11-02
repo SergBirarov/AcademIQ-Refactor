@@ -49,55 +49,57 @@ Create table EventType (
 /*Entities*/
 /*added*/
 CREATE TABLE Users (
-  UserId INT PRIMARY KEY,
+  UserId INT PRIMARY KEY ,
   UserEmail NVARCHAR(50) NOT NULL UNIQUE,
-  --PasswordHash VARBINARY(255) NOT NULL,
-  Password NVARCHAR(255) NOT NULL,
-  UserRole NVARCHAR(20) not null -- 1 Staff, 2 Lecturer, 3 Student
+  PasswordHash VARBINARY(255) NOT NULL,
+  Role_Code smallint not null,
+  PasswordResetToken NVARCHAR(255),
+  PasswordResetTokenExpiration DATETIME,
+  Foreign key (Role_Code) references Roles(Role_Code)
 )
 GO
 
 
 
 CREATE TABLE Students (
-    Id INT NOT NULL PRIMARY KEY,
+    UserId INT NOT NULL PRIMARY KEY,
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
     School_Year smallint NOT NULL,
     Phone NVARCHAR(13) NOT NULL UNIQUE,
-    Email NVARCHAR(50) NOT NULL UNIQUE,
 	Picture_URL NVARCHAR(MAX) NULL ,
 	Address NVARCHAR(50) NULL ,
 	City_Code int NULL ,
 	Enrollment date NULL,
 	FOREIGN KEY (City_Code) REFERENCES Cities(City_Code),
+	FOREIGN KEY (UserId) REFERENCES Users(UserId),
 	)
 GO
 
 CREATE TABLE Instructors (
-    InstructorId INT NOT NULL PRIMARY KEY,
+    UserId INT NOT NULL PRIMARY KEY,
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
     Phone NVARCHAR(13) NOT NULL UNIQUE,
-    Email NVARCHAR(50) NOT NULL UNIQUE,
+	Email nvarchar(50) not null,
 	Major NVARCHAR(20) NULL,
 	EmploymentStartDate date NOT NULL,
 	Address NVARCHAR(50) NULL ,
 	City_Code INT NULL ,
-	FOREIGN KEY (City_Code) REFERENCES Cities(City_Code)
+	FOREIGN KEY (City_Code) REFERENCES Cities(City_Code),
+	FOREIGN KEY (UserId) REFERENCES Users(UserId),
 )
 GO
 
 Create Table Staff (
-	StaffId int Not Null Primary Key, 
+	UserId int Not Null Primary Key, 
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
-	Role_code smallint null,
-	Email Nvarchar(50) Not null UNIQUE,
+	Email Nvarchar(50) Not null,
 	Phone Nvarchar(13) UNIQUE,
 	City_Code INT NULL,
-	Foreign Key (Role_code) References Roles(Role_code)
-	FOREIGN KEY (City_Code) REFERENCES Cities(City_Code)
+	FOREIGN KEY (City_Code) REFERENCES Cities(City_Code),
+	FOREIGN KEY (UserId) REFERENCES Users(UserId),
 	)
 GO
 
@@ -486,6 +488,7 @@ GO
 
 
 
+SELECT @@VERSION;
 
 /*Not added yet*/
 

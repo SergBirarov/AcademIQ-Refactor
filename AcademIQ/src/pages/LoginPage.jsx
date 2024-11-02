@@ -212,7 +212,7 @@ import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from "react-router-dom"; // If you are using react-router-dom for navigation
 
 export default function LoginPage() {
-  const { login } = useContext(AuthContext);  // Get the login function from context
+  const {  user, login, register, authToken, logout  } = useContext(AuthContext);  // Get the login function from context
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);   // Optional: Handle errors

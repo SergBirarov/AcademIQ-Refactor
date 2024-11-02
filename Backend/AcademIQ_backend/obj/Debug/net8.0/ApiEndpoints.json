@@ -1,105 +1,31 @@
 [
   {
-    "ContainingType": "AcademIQ_backend.Controllers.AuthenticationController",
+    "ContainingType": "AcademIQ_backend.Controllers.LoginController",
     "Method": "Login",
-    "RelativePath": "api/Authentication/login",
+    "RelativePath": "api/Login/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
-        "Type": "AcademIQ_backend.Models.RequestModels.MyLoginRequest",
+        "Name": "request",
+        "Type": "AcademIQ_backend.Controllers.LoginRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "AcademIQ_backend.Controllers.AuthenticationController",
-    "Method": "Register",
-    "RelativePath": "api/Authentication/register",
+    "ContainingType": "AcademIQ_backend.Controllers.RegisterController",
+    "Method": "RegisterStaff",
+    "RelativePath": "api/Register/register-staff",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
-        "Type": "AcademIQ_backend.Models.RequestModels.MyRegisterRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AcademIQ_backend.Controllers.AuthenticationController",
-    "Method": "RegisterInstructor",
-    "RelativePath": "api/Authentication/register/instructor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "AcademIQ_backend.Models.RequestModels.InstructorRegisterRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AcademIQ_backend.Controllers.AuthenticationController",
-    "Method": "RegisterStudent",
-    "RelativePath": "api/Authentication/register/student",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "AcademIQ_backend.Models.RequestModels.StudentRegisterRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AcademIQ_backend.Controllers.AuthenticationController",
-    "Method": "ResetPassword",
-    "RelativePath": "api/Authentication/reset-password",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "model",
-        "Type": "AcademIQ_backend.Models.RequestModels.MyResetPasswordRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AcademIQ_backend.Controllers.AuthenticationController",
-    "Method": "GetUserProfile",
-    "RelativePath": "api/Authentication/user",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "AcademIQ_backend.Controllers.StudentController",
-    "Method": "GetStudentProfile",
-    "RelativePath": "api/Student/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
+        "Name": "request",
+        "Type": "AcademIQ_backend.Controllers.RegisterStaffRequest",
         "IsRequired": true
       }
     ],

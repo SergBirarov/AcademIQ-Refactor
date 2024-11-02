@@ -1,9 +1,9 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { UserAvatar } from "./UserAvatar";
-import { useUser } from "../../../context/UserContext";
-
+import { AuthContext} from "../../../context/AuthContext";
+import { useContext } from "react";
 export default function UserPanel(){
-    const { user } = useUser();
+    const { user, logout } = useContext (AuthContext);
 
     if(!user){
         return (

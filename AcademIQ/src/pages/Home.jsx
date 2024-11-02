@@ -1,11 +1,12 @@
 import {  Container, Grid2, Box } from '@mui/material'
 import { SectionTitle, SubSectionTitle } from '../components/common/SectionTitle';
-import { useUser } from '../context/UserContext';
 import BubbleMenu from '../components/common/home/BubbleMenu';
+import { AuthContext } from '../context/AuthContext';
 // import NoticeBoard from '../components/common/home/NoticeBoard';
 import QuickActionsCourses from '../components/common/home/QuickActionsCourses';
 import theme from '../theme';
 import styled from '@emotion/styled';
+import { useContext } from 'react';
 
 const MainContainer = styled(Container)(({ theme }) => ({
     display: 'flex',
@@ -18,7 +19,7 @@ const MainContainer = styled(Container)(({ theme }) => ({
 
 
 export default function Home() {
-    const { user } = useUser();
+    //const { user, logout } = useContext(AuthContext);
 
 
     return (

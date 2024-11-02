@@ -1,10 +1,10 @@
 ﻿using AcademIQ_backend.Models.Users;
+using System.ComponentModel.DataAnnotations;
 
 namespace AcademIQ_backend.Models.CoursesAll
 {
     public class CoursesOnAir
     {
-
         public int Id { get; set; }
         public int CourseId { get; set; }
         public int InstructorId { get; set; }

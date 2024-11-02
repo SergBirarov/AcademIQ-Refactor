@@ -6,17 +6,30 @@ using AcademIQ_backend.Models.CoursesAll;
 using AcademIQ_backend.Models.Calendar;
 using AcademIQ_backend.Models.LecturesEvents;
 using AcademIQ_backend.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AcademIQ_backend.Models.RequestModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace AcademIQ_backend.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+
+        }
+
+        public DbSet<ApplicationUser> Users { get; set; }  // Maps to your existing Users table
+        public DbSet<ApplicationRole> Roles { get; set; }  // Maps to your existing Roles table
+
+
         //Entities
-        public DbSet<Users> Users { get; set; }
+        public  DbSet<Users> AppUsers { get; set; }
         public DbSet<Staff> Staff { get; set; }
         public DbSet<Students> Students { get; set; }
         public DbSet<Instructors> Instructors { get; set; }
-        public DbSet<Roles> Roles { get; set; }
+        public  DbSet<Roles> AppRoles { get; set; }
 
 
         //Courses All
@@ -46,106 +59,83 @@ namespace AcademIQ_backend.Data
         public DbSet<Cities> Cities { get; set; }
         public DbSet<ClassRoomCode> ClassRoomCode { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Defining composite keys for many-to-many relationships
-            modelBuilder.Entity<ActiveStudentCourses>()
-                .HasKey(asc => new { asc.Id, asc.CourseId });
+            base.OnModelCreating(modelBuilder);
+            // Primary Key and Foreign Key Relationships
 
-            modelBuilder.Entity<ActiveStudentAssignments>()
-                .HasKey(asa => new { asa.StudentId, asa.AssignmentId });
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.ToTable("Users");
+                entity.HasKey(u => u.Id); // Maps to UserId in your Users table
+                entity.Property(u => u.UserEmail).HasColumnName("UserEmail");
+                entity.Property(u => u.PasswordHash).HasColumnName("PasswordHash");
+                entity.Property(u => u.Role_Code).HasColumnName("Role_Code");
+                entity.Property(u => u.PasswordResetToken).HasColumnName("PasswordResetToken");
+                entity.Property(u => u.PasswordResetTokenExpiration).HasColumnName("PasswordResetTokenExpiration");
+            });
 
-            modelBuilder.Entity<ActiveStudentExamGrades>()
-                .HasKey(aeg => new { aeg.StudentId, aeg.ExamId });
+            modelBuilder.Entity<ApplicationRole>(entity =>
+            {
+                entity.ToTable("Roles");
+                entity.HasKey(r => r.Id); // Maps to Role_Code in your Roles table
+                entity.Property(r => r.Role_Desc).HasColumnName("Role_Desc");
+            });
 
-            // Defining composite key for CoursesOnAir
-            modelBuilder.Entity<CoursesOnAir>()
-                .HasKey(coa => new { coa.Id, coa.CourseId, coa.InstructorId, coa.StartDate });
-
-            // Defining relationships for Students and Courses (Many-to-Many)
-            modelBuilder.Entity<ActiveStudentCourses>()
-                .HasOne(asc => asc.Student)
-                .WithMany(s => s.ActiveStudentCourses)
-                .HasForeignKey(asc => asc.Id);
-
-            modelBuilder.Entity<ActiveStudentCourses>()
-                .HasOne(asc => asc.Course)
-                .WithMany(c => c.ActiveStudentCourses)
-                .HasForeignKey(asc => asc.CourseId);
-
-            // Defining relationships for Assignments and Courses (One-to-Many)
-            modelBuilder.Entity<Assignments>()
-                .HasOne(a => a.Course)
-                .WithMany(c => c.Assignments)
-                .HasForeignKey(a => a.CourseId);
-
-            // Defining relationships for Exams and Courses (One-to-Many)
-            modelBuilder.Entity<Exams>()
-                .HasOne(e => e.Course)
-                .WithMany(c => c.Exams)
-                .HasForeignKey(e => e.CourseId);
-
-            modelBuilder.Entity<Exams>()
-                .HasOne(e => e.ExamType)
-                .WithMany()
-                .HasForeignKey(e => e.ExamTypeId);
-
-            // Relationships for Events
-            modelBuilder.Entity<Event>()
-                .HasOne(e => e.EventType)
-                .WithMany(et => et.CalendarEvents)
-                .HasForeignKey(e => e.EventTypeCode);
-
-            modelBuilder.Entity<Event>()
-                .HasOne(e => e.Course)
-                .WithMany(c => c.Event)
-                .HasForeignKey(e => e.CourseId);
-
-            // Relationships for CoursesOnAir
-            modelBuilder.Entity<CoursesOnAir>()
-                .HasOne(coa => coa.Student)
-                .WithMany(s => s.CoursesOnAir)
-                .HasForeignKey(coa => coa.Id);
-
-            modelBuilder.Entity<CoursesOnAir>()
-                .HasOne(coa => coa.Course)
-                .WithMany(c => c.CoursesOnAir)
-                .HasForeignKey(coa => coa.CourseId);
-
-            modelBuilder.Entity<CoursesOnAir>()
-                .HasOne(coa => coa.Instructor)
-                .WithMany(i => i.CoursesOnAir)
-                .HasForeignKey(coa => coa.InstructorId);
-
-            // Cities relationships
-            modelBuilder.Entity<Students>()
-                .HasOne(s => s.City_Name)
-                .WithMany(c => c.Students)
-                .HasForeignKey(s => s.City_Code);
-
-            modelBuilder.Entity<Instructors>()
-                .HasOne(i => i.City_Name)
-                .WithMany(c => c.Instructors)
-                .HasForeignKey(i => i.City_Code);
-
-            modelBuilder.Entity<Staff>()
-                .HasOne(s => s.City_Name)
-                .WithMany(c => c.Staff)
-                .HasForeignKey(s => s.City_Code);
-
-            // Role relationships with Staff
-            modelBuilder.Entity<Staff>()
-                .HasOne(s => s.Role)
-                .WithMany(r => r.Staff)
-                .HasForeignKey(s => s.Role_Code);
 
             modelBuilder.Entity<Users>()
-    .HasOne(u => u.Role)
-    .WithMany(r => r.Users)
-    .HasForeignKey(u => u.Role_Code);
+        .HasOne(u => u.Role)
+        .WithMany(r => r.Users)
+        .HasForeignKey(u => u.Role_Code)
+        .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Students>()
+                .HasOne(s => s.User)
+                .WithOne(u => u.Student)
+                .HasForeignKey<Students>(s => s.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Instructors>()
+                .HasOne(i => i.User)
+                .WithOne(u => u.Instructor)
+                .HasForeignKey<Instructors>(i => i.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Staff>()
+                .HasOne(st => st.User)
+                .WithOne(u => u.Staff)
+                .HasForeignKey<Staff>(st => st.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // ActiveStudentAssignments relationship with Students
+            modelBuilder.Entity<ActiveStudentAssignments>()
+                .HasKey(a => new { a.StudentId, a.AssignmentId });
+
+            modelBuilder.Entity<ActiveStudentAssignments>()
+                .HasOne(a => a.Student)
+                .WithMany(s => s.ActiveStudentAssignments)
+                .HasForeignKey(a => a.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);  // Adjust the delete behavior if needed
+
+            modelBuilder.Entity<ActiveStudentAssignments>()
+                .HasOne(a => a.Assignment)
+                .WithMany()
+                .HasForeignKey(a => a.AssignmentId);
+
+            // ActiveStudentExamGrades relationship with Students
+            modelBuilder.Entity<ActiveStudentExamGrades>()
+                .HasKey(e => new { e.StudentId, e.ExamId });
+
+            modelBuilder.Entity<ActiveStudentExamGrades>()
+                .HasOne(e => e.Student)
+                .WithMany(s => s.ActiveStudentExamGrades)
+                .HasForeignKey(e => e.StudentId)
+                .OnDelete(DeleteBehavior.Restrict);  // Adjust the delete behavior if needed
+
+            modelBuilder.Entity<ActiveStudentExamGrades>()
+                .HasOne(e => e.Exam)
+                .WithMany()
+                .HasForeignKey(e => e.ExamId);
 
 
 

@@ -7,7 +7,7 @@ namespace AcademIQ_backend.Models.RequestModels
         public required int  UserId { get; set; }           
         public required string UserEmail { get; set; }     
         public required string Password { get; set; }
-        public required short Role_Code { get; set; }
+        public required int Role_Code { get; set; }
 
 
     }

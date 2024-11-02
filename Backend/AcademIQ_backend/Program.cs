@@ -1,80 +1,7 @@
-//using AcademIQ_backend.Data;
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.IdentityModel.Tokens;
-//using System.Text;
-
-//internal class Program
-//{
-//    private static void Main(string[] args)
-//    {
-//        var builder = WebApplication.CreateBuilder(args);
-//        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
-//        builder.Services.AddDbContext<AppDbContext>(options =>
-//            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
-//        builder.Services.AddCors(options =>
-//        {
-//            options.AddPolicy(name: MyAllowSpecificOrigins,
-//                              policy =>
-//                              {
-//                                  policy.WithOrigins("http://localhost:5173/") //  frontend
-//                                        .AllowAnyHeader()
-//                                        .AllowAnyMethod();
-
-//                              });
-//        });
-
-//        // Add services to the container.
-//        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer(options =>
-//    {
-//        options.TokenValidationParameters = new TokenValidationParameters
-//        {
-//            ValidateIssuer = true,
-//            ValidateAudience = true,
-//            ValidateLifetime = true,
-//            ValidateIssuerSigningKey = true,
-//            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-//            ValidAudience = builder.Configuration["Jwt:Audience"],
-//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-//        };
-//    });
-
-//        builder.Services.AddAuthorization(); 
-
-//        // Add Controllers (API endpoints)
-//        builder.Services.AddControllers();
-
-
-//        var app = builder.Build();
-
-//        // Configure the HTTP request pipeline.
-//        if (app.Environment.IsDevelopment())
-//        {
-//            app.UseSwagger();
-//            app.UseSwaggerUI();
-//        }
-
-//        app.UseHttpsRedirection();
-
-//        // Add this to enable CORS
-//        app.UseCors(MyAllowSpecificOrigins); 
-
-//        app.UseAuthentication();
-//        app.UseAuthorization();
-
-//        app.MapControllers();
-
-//        app.Run();
-//    }
-//}
-
-
 using AcademIQ_backend.Data;
+using AcademIQ_backend.Models.RequestModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -86,47 +13,58 @@ namespace AcademIQ_backend
         private static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            //var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            var jwtSettings = builder.Configuration.GetSection("Jwt");
+            var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]);
+
+            builder.Services.AddControllers();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddCors(options =>
+            builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  policy =>
-                                  {
-                                      policy.WithOrigins("http://localhost:5173") 
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                                  });
-            });
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
-            // Add Authentication services (JWT)
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(options =>
                 {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                        ValidAudience = builder.Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "default_secret_key"))
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = true,
+                        ValidateAudience = false,
+                        ValidIssuer = jwtSettings["Issuer"],
+                        ValidAudience = jwtSettings["Audience"],
                     };
                 });
 
-            // Add Authorization services
-            builder.Services.AddAuthorization(); // <--- This is what you are missing
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireStudentRole", policy => policy.RequireRole("Student"));
+                options.AddPolicy("RequireInstructorRole", policy => policy.RequireRole("Instructor"));
+                options.AddPolicy("RequireStaffRole", policy => policy.RequireRole("Staff"));
+            });
 
-            // Add Controllers (API endpoints)
-            builder.Services.AddControllers();
-
-            // Add Swagger for API documentation (only for development environment)
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
@@ -139,18 +77,15 @@ namespace AcademIQ_backend
 
             app.UseHttpsRedirection();
 
-            // Enable CORS
-            app.UseCors(MyAllowSpecificOrigins);
-
-            // Use Authentication & Authorization middleware
             app.UseAuthentication();
+
             app.UseAuthorization();
 
-            // Map Controllers (API routes)
             app.MapControllers();
 
-            // Run the application
             app.Run();
+
+            
         }
     }
 }

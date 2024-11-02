@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcademIQ_backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+174c5981d89ea74f9926bc414e9a52dd7dacf2f1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3453835baa1577a768162e444871e3fa9211fc9")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcademIQ_backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcademIQ_backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

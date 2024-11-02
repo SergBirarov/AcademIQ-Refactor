@@ -5,7 +5,7 @@
         // General user properties
         public int UserId { get; set; }
         public string UserEmail { get; set; }
-        public short Role_Code { get; set; }
+        public int Role_Code { get; set; }
         public string Role_Desc { get; set; }
 
         // Role-specific properties
@@ -47,7 +47,7 @@
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public short Role_Code { get; set; }
+        public int Role_Code { get; set; }
         public int City_Code { get; set; }
     }
 

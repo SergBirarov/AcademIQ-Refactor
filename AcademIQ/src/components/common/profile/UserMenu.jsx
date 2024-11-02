@@ -1,4 +1,5 @@
 import { Box, List, ListItem, ListItemIcon, ListItemText, styled } from "@mui/material";
+import { useContext } from "react";
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -11,8 +12,7 @@ import AssuredWorkloadOutlinedIcon from '@mui/icons-material/AssuredWorkloadOutl
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import SpatialAudioOffOutlinedIcon from '@mui/icons-material/SpatialAudioOffOutlined';
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
-import { useUser } from '../../../context/UserContext.jsx';
-
+import { AuthContext } from "../../../context/AuthContext.jsx";
 
 const studentMenuItems = [
     { text: 'Home', icon: <HomeIcon /> },
@@ -38,7 +38,7 @@ const staffMenuItems = [
 
 export default function UserMenu() {
 
-    const { user } = useUser();
+    const { user } = useContext(AuthContext);
 
     const navigate = useNavigate();
 

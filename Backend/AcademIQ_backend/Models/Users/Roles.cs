@@ -5,7 +5,7 @@ namespace AcademIQ_backend.Models.Users
     public class Roles
     {
         [Key]
-        public required short Role_Code { get; set; }
+        public required int Role_Code { get; set; }
         public required string Role_Desc { get; set; }
 
         // Navigation properties

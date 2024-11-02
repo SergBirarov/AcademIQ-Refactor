@@ -10,6 +10,9 @@ C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_back
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Humanizer.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Bcl.TimeProvider.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
@@ -26,6 +29,8 @@ C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_back
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\sergb\OneDrive\Documents\GitHub\AcademIQ-Refactor\Backend\AcademIQ_backend\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

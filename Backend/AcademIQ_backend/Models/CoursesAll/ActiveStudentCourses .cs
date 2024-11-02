@@ -5,6 +5,7 @@ namespace AcademIQ_backend.Models.CoursesAll
 {
     public class ActiveStudentCourses
     {
+        [Key]
         public int Id { get; set; }
         public int CourseId { get; set; }
 

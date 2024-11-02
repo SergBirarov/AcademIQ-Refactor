@@ -1,9 +1,11 @@
 ﻿using AcademIQ_backend.Models.Users;
+using System.ComponentModel.DataAnnotations;
 
 namespace AcademIQ_backend.Models.ExamsAssignments
 {
     public class ActiveStudentAssignments
     {
+        [Key]
         public int StudentId { get; set; }
         public int AssignmentId { get; set; }
         public string? SubmissionStatus { get; set; }
