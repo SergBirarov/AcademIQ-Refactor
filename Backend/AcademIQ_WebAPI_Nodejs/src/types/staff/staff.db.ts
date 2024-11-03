@@ -13,14 +13,12 @@ import Db from "../../utils/db";
 
 export async function saveStaff(staff: StaffType, procName: string): Promise<any> {
     try{
-        const result = await Db.executeStoredProc('sp_AddStaff', {
-            UserId: staff.UserId,
-            FirstName: staff.FirstName,
-            LastName: staff.LastName,
-            Phone: staff.Phone,
-            City_Code: staff.City_Code
-        });
-        return result;
+        const result = await Db.executeStoredProc(procName, staff);
+        const status = result[0]?.status;
+
+        if(status === 'Staff already exists')
+            return { message: 'Staff already exists' };
+        return {message: 'Staff Member created successfully'};
     }catch(err){
         console.error("Error in saveStaff function:", err);
         throw err;

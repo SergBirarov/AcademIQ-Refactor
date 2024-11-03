@@ -10,26 +10,19 @@ export type UserType = {
   Role_Code: number,
 }
 
-export async function addUser({ UserId, UserEmail,
-   PasswordHash, Role_Code, }: UserType): Promise<any> {
+export async function addUser(user: UserType): Promise<any> {
 
-       PasswordHash = await passwordEncryption(PasswordHash);
+  user.PasswordHash = await passwordEncryption(user.PasswordHash);
 
   try {
-    return await saveUser({
-      UserId,
-      UserEmail,
-      PasswordHash,
-      Role_Code
-    });
-
+    return await saveUser(user);
   } catch (error) {
     console.log(error); console.error("Error in addUser function:", error); // Log the error
     throw new Error("Failed to add user"); 
   }
 };
 
-const passwordEncryption = async(password: string): Promise<string> => {
+export const passwordEncryption = async(password: string): Promise<string> => {
 
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   return hashedPassword;

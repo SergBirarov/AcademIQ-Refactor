@@ -5,6 +5,7 @@ export type StaffType = {
     UserId: number,
     FirstName: string, 
     LastName: string,
+    Email: string,
     Phone: string,
     City_Code: number
 }

@@ -5,15 +5,13 @@ import propTypes from "prop-types";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
 
   const fetchUserProfile = useCallback(async () => {
     try {
-      const response = await fetch("https://localhost:5092/api/Authentication/user", {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
+      let id = user.UserId;
+      const response = await fetch("https://localhost:5000/api/users/" + id + "", {
       });
 
       if (response.ok) {
@@ -36,14 +34,15 @@ export const AuthProvider = ({ children }) => {
 
   
   // Login function using Fetch API
-  const login = async (email, password) => {
+  const login = async (userId, password) => {
     try {
-      const response = await fetch('https://localhost:5092/api/Authentication/login', {
+      console.log(userId, password);
+      const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ userId, password })
       });
 
       console.log(response);
@@ -62,29 +61,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("authToken", token);
       setAuthToken(token);
       console.log("Authorization:" `Bearer ${token}`);
-      const profileResponse = await fetch('https://localhost:5092/api/Authentication/user', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          "Authorization": `Bearer ${token}`
-        },
-        cache: 'no-cache',
-      });
-      console.log(profileResponse);
-
-      if (!profileResponse.ok) {
-        throw new Error('Could not fetch user data');
-      }
-
-      const userProfileData = await profileResponse.json();
-      console.log(userProfileData);
-
-      // Optionally fetch user data from the API
-      setUser(userProfileData);
-
-      fetchUserProfile();
-      return data;
     } catch (error) {
       console.error("Login error", error);
       throw error;
@@ -94,7 +70,7 @@ export const AuthProvider = ({ children }) => {
   //Register function using Fetch API
   const register = async (email, password, role) => {
     try {
-      const response = await fetch('https://localhost:5092/api/Authentication/register', {
+      const response = await fetch('http://localhost:5092/api/Authentication/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
