@@ -24,11 +24,13 @@ export async function getStudentById(req: Request, res: Response){
 
 
 export async function register(req: Request, res: Response) {
+    console.log("(register)");
     try {
-        let student : StudentType = req.body;
-        if (student === undefined)
+        let {UserId, FirstName, LastName, School_Year, Phone, Picture_URL, Address, City_Code, Enrollment} = req.body;
+        if (UserId === undefined || FirstName === undefined || LastName === undefined || School_Year === undefined || Phone === undefined || Picture_URL === undefined || Address === undefined || City_Code === undefined || Enrollment === undefined)
           return res.status(400).json({ message: "(register)all fields are required" });
 
+        const student : StudentType = {UserId, FirstName, LastName, School_Year, Phone, Picture_URL, Address, City_Code, Enrollment};
         const result = await addStudent(student);
 
         if (result.message == 'Student already exists')

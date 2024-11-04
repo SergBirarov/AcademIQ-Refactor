@@ -1,4 +1,4 @@
-import { useUser } from "../../../context/UserContext";
+// import { useUser } from "../../../context/AuthContext";
 import { Box, Tooltip, IconButton, Grid2 } from "@mui/material";
 import  theme  from "../../../theme";
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function BubbleMenu() {
-    const {user } = useUser();
+    // const {user } = useUser();
     const navigate = useNavigate();
     
     const [hovered, setHovered] = useState(null);

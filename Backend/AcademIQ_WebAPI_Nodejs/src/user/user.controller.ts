@@ -11,13 +11,13 @@ dotenv.config();
 
 export async function login(req: Request, res: Response) {
   try {
-    let { userId, password } = req.body;
-    console.log("(login)userId:", userId, "password:", password);
+    let { UserId, PasswordHash } = req.body;
+    console.log("(login)userId:", UserId, "password:", PasswordHash);
 
     // Check if the user exists
-    let userResult = await Db.query(`select * from Users where UserId = ${userId}`);
+    let userResult = await Db.query(`select * from Users where UserId = ${UserId}`);
     const request = Db.pool.request();
-    request.input('UserId', userId);
+    request.input('UserId', UserId);
 
     console.log("userResult",userResult.recordset[0]);
     if (!userResult ) {
@@ -28,7 +28,7 @@ export async function login(req: Request, res: Response) {
     console.log("Fetched user:", user);
 
     // Compare the provided password with the stored hash
-    const isMatch = await bcrypt.compare(password, user.PasswordHash);
+    const isMatch = await bcrypt.compare(PasswordHash, user.PasswordHash);
 
     console.log("isMatch:", isMatch);
     if (!isMatch) {

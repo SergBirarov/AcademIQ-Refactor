@@ -3,9 +3,9 @@ import { getAllStudents, getStudentById, register   } from "./student.controller
 
 const studentRouter = Router();
 
-studentRouter.get('/students', getAllStudents)
-            .get('/students/:id', getStudentById)
-            .post('/students/register', register);
+studentRouter.get('/', getAllStudents)
+            .get('/:id', getStudentById)
+            .post('/register', register);
 
 export default studentRouter;
 

@@ -9,9 +9,14 @@ export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
 
   const fetchUserProfile = useCallback(async () => {
+    if(!authToken){
+      console.error("No token found in local storage");
+      return;
+    }
     try {
-      let id = user.UserId;
-      const response = await fetch("https://localhost:5000/api/users/" + id + "", {
+      let id = user?.UserId || JSON.parse(localStorage.getItem('user'))?.UserId;
+      let endpoint = user.Role_Code == "3" ? "students" : "staff";
+      const response = await fetch(`http://localhost:5000/api/${endpoint}/${id}`, {
       });
 
       if (response.ok) {
@@ -24,7 +29,7 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching user profile:", error);
       logout();
     }
-  }, [authToken]);
+  }, [authToken, user]);
 
   useEffect(() => {
     if (authToken) {
@@ -34,15 +39,15 @@ export const AuthProvider = ({ children }) => {
 
   
   // Login function using Fetch API
-  const login = async (userId, password) => {
+  const login = async (UserId, PasswordHash) => {
     try {
-      console.log(userId, password);
+      console.log(UserId, PasswordHash);
       const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ userId, password })
+        body: JSON.stringify({ UserId, PasswordHash })
       });
 
       console.log(response);
@@ -53,14 +58,16 @@ export const AuthProvider = ({ children }) => {
 
       const data = await response.json();
       console.log(data);
-      const { token, userProfile } = data;
-      console.log(userProfile);
+      const { token, user } = data;
+      console.log(user);
       console.log(token);
 
       // Store token in local storage
       localStorage.setItem("authToken", token);
+      localStorage.setItem("user", JSON.stringify(user));
       setAuthToken(token);
-      console.log("Authorization:" `Bearer ${token}`);
+      setUser(user);
+      console.log(`Authorization: Bearer ${token}`);
     } catch (error) {
       console.error("Login error", error);
       throw error;
