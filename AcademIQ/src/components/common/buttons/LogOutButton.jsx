@@ -7,7 +7,7 @@ export const LogOutButton = () => {
             alignItems: 'center',
             justifyContent: 'center',
         }}>
-        <Button size="medium">
+        <Button>
             Log Out
         </Button>
         </Box>

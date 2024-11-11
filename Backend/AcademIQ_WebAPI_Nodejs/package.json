@@ -4,7 +4,7 @@
   "description": "This is a simple starter kit for a Node.js project using TypeScript. It includes a basic setup for TypeScript, Nodemon, and a tsconfig.json file. ",
   "main": "./dist/main.js",
   "scripts": {
-    "start": "node ./dist/main.js",
+  "start": "node ./dist/main.js",
     "build": "npx tsc",
     "dev": "nodemon ./src/main.ts"
   },
@@ -31,3 +31,4 @@
     "mssql": "^11.0.1"
   }
 }
+

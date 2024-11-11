@@ -1,4 +1,5 @@
-import { useUser } from "../context/UserContext";
+import { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { SectionTitle } from "../components/common/SectionTitle";
 import { Container, Box, Typography, Tabs, Tab, Avatar, FormControl, Grid2, Paper, Button, TextField, Divider } from "@mui/material";
 import styled from '@emotion/styled';
@@ -11,7 +12,7 @@ import animation from '../assets/json-animations/Person.json';
 
 
 export default function Profile() {
-    const {user} = useUser();
+    const {user} = useSelector((state) => state.auth);
     const [tab, setTab] = useState(0);
 
     const StyledContainer = styled(Container)(({ theme }) => ({
@@ -46,8 +47,8 @@ export default function Profile() {
                     <Tab label="Update Us" />
                 </Tabs>
                 <Box component={'div'} sx={{ textAlign: 'center', padding: 2, mt: 2 }}>
-                                <Avatar src={user?.picture_URL} sx={{ width: 120, height: 120, margin: 'auto', mb: 2, border: '2px solid black' }} />
-                                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{user?.firstName} {user?.lastName}</Typography>
+                                <Avatar src={user?.Picture_URL} sx={{ width: 120, height: 120, margin: 'auto', mb: 2, border: '2px solid black' }} />
+                                <Typography variant="h6" sx={{ fontWeight: 'bold' }}>{user?.FirstName} {user?.LastName}</Typography>
                             </Box>
 
                 <Box sx={{ paddingTop: 2 }}>
@@ -60,25 +61,16 @@ export default function Profile() {
 
                                 <Grid2 item xs={12} sm={6}>
                                     <Box component={'div'}>
+                                        
                                         <InfoCard sx={{ padding: 2,
                                             display: 'flex',
                                             flexDirection: 'column',
                                             
                                          }}>
                                             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>Contact Information</Typography>
-                                            <Typography variant="body1"><strong>Email:</strong> {user?.email}</Typography>
-                                            <Typography variant="body1"><strong>Phone:</strong> {user?.phone}</Typography>
-                                            <Typography variant="body1"><strong>Address:</strong> {user?.address}</Typography>
-                                        </InfoCard>
-                                        <InfoCard sx={{ padding: 2,
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            
-                                         }}>
-                                            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>Contact Information</Typography>
-                                            <Typography variant="body1"><strong>Email:</strong> {user?.email}</Typography>
-                                            <Typography variant="body1"><strong>Phone:</strong> {user?.phone}</Typography>
-                                            <Typography variant="body1"><strong>Address:</strong> {user?.address}</Typography>
+                                            <Typography variant="body1"><strong>Email:</strong> {user?.Email}</Typography>
+                                            <Typography variant="body1"><strong>Phone:</strong> {user?.Phone}</Typography>
+                                            <Typography variant="body1"><strong>Address:</strong> {user?.Address}</Typography>
                                         </InfoCard>
                                     </Box>
                                     </Grid2>

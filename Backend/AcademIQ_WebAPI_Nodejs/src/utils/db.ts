@@ -1,5 +1,4 @@
 import { connect, ConnectionPool } from 'mssql';
-import { Employee } from '../types/employee.type';
 import dotenv from 'dotenv';
 
 
@@ -28,16 +27,36 @@ export default class Db {
         }
     }
 
-    static async query(query: string): Promise<any>{
-        await Db.init();
-        try{
-            const result = await Db.pool.request().query(query);
-            return result;
-        }catch(err){
-            console.log("Query Failed ", err);   
-            throw err;
-        }
-    };
+
+    static async query(query: string, parameters: Record<string, { value: any, type: any }> = {}): Promise<any> {
+      await Db.init();
+      try {
+          const request = Db.pool.request();
+
+          for (const [key, parameter] of Object.entries(parameters)) {
+            const { value, type } = parameter;
+              request.input(key, type, value);
+          }
+
+          const result = await request.query(query);
+          return result.recordset; // Return the result set, not the entire response
+      } catch (err) {
+          console.error("Query Failed ", err);
+          throw err;
+      }
+  }
+
+
+    // static async query(query: string): Promise<any>{
+    //     await Db.init();
+    //     try{
+    //         const result = await Db.pool.request().query(query);
+    //         return result;
+    //     }catch(err){
+    //         console.log("Query Failed ", err);   
+    //         throw err;
+    //     }
+    // };
     
 
     // Method to execute a stored procedure with parameters

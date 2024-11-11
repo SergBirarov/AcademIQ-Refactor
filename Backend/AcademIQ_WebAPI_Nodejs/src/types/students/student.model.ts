@@ -1,4 +1,4 @@
-import { saveStudent } from "../students/student.db";
+import { saveStudent, getActiveCoursesForStudent as getCoursesFromDb, assignStudentToCourse } from "../students/student.db";
 
 export type StudentType = {
     UserId: number,
@@ -18,5 +18,23 @@ export async function addStudent(student: StudentType): Promise<any> {
   } catch (error) {
     console.error("Error in addStudent function:", error);
     throw error;
+  }
+}
+
+export async function getActiveCourses(studentId: number): Promise<any> {
+  try {
+      return await getCoursesFromDb(studentId);
+  } catch (err) {
+      console.error("Error in getActiveCourses function:", err);
+      throw err;
+  }
+}
+
+export async function addStudentToCourse(studentId: number, courseId: number): Promise<any> {
+  try {
+      return await assignStudentToCourse(studentId, courseId);
+  } catch (err) {
+      console.error("Error in addStudentToCourse function:", err);
+      throw err;
   }
 }

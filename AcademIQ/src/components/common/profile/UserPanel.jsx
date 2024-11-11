@@ -1,22 +1,46 @@
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardContent, CardHeader, Typography, Box } from "@mui/material";
 import { UserAvatar } from "./UserAvatar";
-import { AuthContext} from "../../../context/AuthContext";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 export default function UserPanel(){
-    const { user, logout } = useContext (AuthContext);
+    const { user  } = useSelector((state) => state.auth);
 
-    if(!user){
+    
+    if(user === null){
         return (
             <div>Loading...</div>
         )}
-
+        
+    const { FirstName, LastName, Picture_URL} = user;
     return(
-        <Card sx={{ height: '30%', width: '100%', borderRadius: '0', border: 'none', boxShadow: 'none',
-            backgroundColor: 'transparent',
-            backdropFilter: 'blur(5px)',
+        <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'transparent', padding: 0
+        }}>
+            <CardHeader avatar={<UserAvatar image={Picture_URL} size="small" />} title={<Typography variant="h6">{FirstName} {LastName}</Typography>}>
+            <UserAvatar image={Picture_URL} size="small" />
+                <Typography variant="h6">
+                    {FirstName} {LastName}
+                </Typography>
+            </CardHeader>
+            <CardContent sx={{  backgroundColor: 'transparent', padding: 0}}>
+
             
-          }}>
-                <CardContent>
+                <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent:'space-evenly'
+            }}>
+                            <Typography variant="body2">
+                                <strong>School:</strong> Ruppin Academic Center
+                            </Typography>
+                            <Typography variant="body2">
+                                <strong>Major:</strong> Software Engineering
+                            </Typography>
+                            <Typography variant="body2">
+                                <strong>Class:</strong> 33
+                            </Typography>
+                            </Box>
+
+            </CardContent>
+                {/* <CardContent>
 
                             <Box sx={{
                                 display: 'flex',
@@ -24,11 +48,11 @@ export default function UserPanel(){
                                 alignItems: 'center',
                                 mb: 2
                             }}>
-                            <UserAvatar image={user.picture_URL} size="small"/>
+                            <UserAvatar image={Picture_URL} size="small" />
                             <Typography
                              variant="h6"
                               align="center">
-                                {user.firstName} {user.lastName}
+                                {FirstName} {LastName}
                             </Typography>
                             </Box>
             
@@ -48,7 +72,7 @@ export default function UserPanel(){
                                 <strong>Class:</strong> 33
                             </Typography>
                             </Box>
-                </CardContent>
+                </CardContent> */}
             </Card>
     )
 }

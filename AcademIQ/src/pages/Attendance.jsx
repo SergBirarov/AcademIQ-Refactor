@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useUser } from '../context/UserContext';
+import  { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 import { MDBCheckbox, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import LandingButton from '../components/common/buttons/LandingButton';
 import { Box, Typography } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -12,77 +11,77 @@ import propTypes from 'prop-types';
 
 export default function Attendance({ lessonId }) {
 
-    const [students, setStudents] = useState();
-    const { user } = useUser();
-    const [selectedDate, setSelectedDate] = useState(dayjs());
-    const API_URL = `http://www.Misha-RN-Test.somee.com/api`;
+    // const [students, setStudents] = useState();
+    // const { loggedIn: user } = useContext(AuthContext);
+    // const [selectedDate, setSelectedDate] = useState(dayjs());
+    // const API_URL = `http://localhost:5000/api`;
 
 
-    useEffect(() => {
-        // Fetch data from API or local storage
-        // fetch('API_URL')
-        //.then(response => response.json())
-        //.then(data => setStudents(data))
-        //.catch(error => console.error('Error:', error));
+    // useEffect(() => {
+    //     // Fetch data from API or local storage
+    //     // fetch('API_URL')
+    //     //.then(response => response.json())
+    //     //.then(data => setStudents(data))
+    //     //.catch(error => console.error('Error:', error));
 
-        // Mock data
-        const studentsData = [
-            { id: "123456", name: 'John Doe', img: 'https://mdbootstrap.com/img/new/avatars/8.jpg' },
-            { id: "684265", name: 'Michael Doe', img: 'https://mdbootstrap.com/img/new/avatars/7.jpg' },
-            { id: "9876551", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876552", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876553", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876554", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876555", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876556", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876557", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            { id: "9876558", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
-            //... more students
-        ];
-        setStudents(studentsData);
+    //     // Mock data
+    //     const studentsData = [
+    //         { id: "123456", name: 'John Doe', img: 'https://mdbootstrap.com/img/new/avatars/8.jpg' },
+    //         { id: "684265", name: 'Michael Doe', img: 'https://mdbootstrap.com/img/new/avatars/7.jpg' },
+    //         { id: "9876551", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876552", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876553", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876554", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876555", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876556", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876557", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         { id: "9876558", name: 'mdbootstrap Doe', img: 'https://mdbootstrap.com/img/new/avatars/6.jpg' },
+    //         //... more students
+    //     ];
+    //     setStudents(studentsData);
 
-    }, []);
+    // }, []);
 
-    const handleCheckboxChange = async (studentId, isChecked) => {
-        try {
-            if (isChecked) {
+    // const handleCheckboxChange = async (studentId, isChecked) => {
+    //     try {
+    //         if (isChecked) {
 
-                // Send data to server
-                const response = await fetch(`${API_URL}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: JSON.stringify({
-                        StudentId: studentId,
-                        LessonDate: selectedDate.format('DD/MM/YYYY'),
-                        LessonId: lessonId
-                    })
-                });
-                const data = await response.json();
-                // Handle response
-                console.log(data); // For example
-            }
-            else {
-                // Send data to server
-                const response = await fetch(`${API_URL}?studentId=${studentId}&lessonId=${lessonId}&lessonDate=${selectedDate.format('YYYY-MM-DD')}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        "Authorization": `Bearer ${localStorage.getItem('token')}`
-                    },
-                });
-                const data = await response.json();
-                // Handle response
-                console.log(data); // For example
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
+    //             // Send data to server
+    //             const response = await fetch(`${API_URL}`, {
+    //                 method: 'POST',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'Accept': 'application/json',
+    //                     "Authorization": `Bearer ${localStorage.getItem('token')}`
+    //                 },
+    //                 body: JSON.stringify({
+    //                     StudentId: studentId,
+    //                     LessonDate: selectedDate.format('DD/MM/YYYY'),
+    //                     LessonId: lessonId
+    //                 })
+    //             });
+    //             const data = await response.json();
+    //             // Handle response
+    //             console.log(data); // For example
+    //         }
+    //         else {
+    //             // Send data to server
+    //             const response = await fetch(`${API_URL}?studentId=${studentId}&lessonId=${lessonId}&lessonDate=${selectedDate.format('YYYY-MM-DD')}`, {
+    //                 method: 'DELETE',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'Accept': 'application/json',
+    //                     "Authorization": `Bearer ${localStorage.getItem('token')}`
+    //                 },
+    //             });
+    //             const data = await response.json();
+    //             // Handle response
+    //             console.log(data); // For example
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //     }
+    // };
 
 
 

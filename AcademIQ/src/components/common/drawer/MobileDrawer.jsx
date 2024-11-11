@@ -1,5 +1,6 @@
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { useContext } from 'react';
 import { Button, Toolbar } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
@@ -12,7 +13,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import GradeIcon from '@mui/icons-material/Grade';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useUser } from '../../../context/UserContext';
+import { AuthContext } from '../../../context/AuthContext';
 import { Outlet } from 'react-router-dom';
 
 const drawerWidth = 40;
@@ -49,7 +50,7 @@ const closedMixin = (theme) => ({
 
 export default function MobileDrawer() {
 
-    const { user } = useUser();
+    const { loggedIn:  user } = useContext(AuthContext);
     const theme = useTheme();
 
     return (

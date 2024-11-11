@@ -1,55 +1,23 @@
 
-import { createContext, useState, useEffect, useCallback  } from "react";
+import { createContext, useState, useEffect  } from "react";
 import propTypes from "prop-types";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
-  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')) || null);
+  const [authToken, setAuthToken] = useState(() => localStorage.getItem('authToken') || null);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!authToken);
 
-  const fetchUserProfile = useCallback(async () => {
-    if(!authToken){
-      console.error("No token found in local storage");
-      return;
-    }
+  const login = async(UserId, PasswordHash) => {
     try {
-      let id = user?.UserId || JSON.parse(localStorage.getItem('user'))?.UserId;
-      let endpoint = user.Role_Code == "3" ? "students" : "staff";
-      const response = await fetch(`http://localhost:5000/api/${endpoint}/${id}`, {
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData);
-      } else {
-        logout();
-      }
-    } catch (error) {
-      console.error("Error fetching user profile:", error);
-      logout();
-    }
-  }, [authToken, user]);
-
-  useEffect(() => {
-    if (authToken) {
-      fetchUserProfile();
-    }
-  }, [authToken, fetchUserProfile]);
-
-  
-  // Login function using Fetch API
-  const login = async (UserId, PasswordHash) => {
-    try {
-      console.log(UserId, PasswordHash);
       const response = await fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ UserId, PasswordHash })
       });
-
       console.log(response);
 
       if (!response.ok) {
@@ -57,23 +25,53 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      console.log(data);
-      const { token, user } = data;
-      console.log(user);
-      console.log(token);
 
+      console.log(data);
+      const token = data.token;
+      const fetchedUserId = data.user.UserId;
+      const fetchedRoleCode = data.user.Role_Code;
+
+      console.log(fetchedUserId, fetchedRoleCode);
+      let userProfile = await fetchProfileData(fetchedUserId, fetchedRoleCode);
+      
+      setAuthToken(token);
+      setUser(userProfile);
+      
       // Store token in local storage
       localStorage.setItem("authToken", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      setAuthToken(token);
-      setUser(user);
-      console.log(`Authorization: Bearer ${token}`);
+      localStorage.setItem("user", JSON.stringify(userProfile));
+      console.log(`Authorization: Bearer ${JSON.stringify(token)}, user: ${JSON.stringify(userProfile)}`);
+      setIsAuthenticated(true);
+      return isAuthenticated;
     } catch (error) {
       console.error("Login error", error);
       throw error;
     }
   };
 
+  const fetchProfileData = async (fetchedUserId, fetchedRoleCode) =>{
+    const endpoint = fetchedRoleCode == "3" ? "students" : "staff";
+    console.log(`http://localhost:5000/api/${endpoint}/${fetchedUserId}`);
+    try{
+    const response = await fetch(`http://localhost:5000/api/${endpoint}/${fetchedUserId}`, {
+      method: 'GET',  
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user profile: ${response.statusText}`);
+    }
+
+      const userData = await response.json();
+      return userData;
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    throw error;
+  }
+    
+  }
   //Register function using Fetch API
   const register = async (email, password, role) => {
     try {
@@ -98,13 +96,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    console.log("logout");
     localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
     setAuthToken(null);
     setUser(null);
+    setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, authToken, logout }}>
+    <AuthContext.Provider value={{ user, login, register, authToken, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );

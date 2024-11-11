@@ -1,122 +1,104 @@
-import  styled  from '@emotion/styled';
-import Card from '@mui/material/Card';
-import { Button, Stack, Tooltip, IconButton,Divider, Avatar } from '@mui/material';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import Typography from '@mui/material/Typography';
-import theme from '../../theme';
+import styled from '@emotion/styled';
+import { Card, Button, Stack, Tooltip, IconButton, Divider, Avatar, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 import BookIcon from '@mui/icons-material/Book';
-import AssignmentIcon from '@mui/icons-material/Book';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import ContactMailIcon from '@mui/icons-material/ContactMail'; // New icon for contacting instructor
+import propTypes from 'prop-types';
 
-
- 
-
-const StyledCourseCard = styled(Card)(({ theme }) => ({
+// Styled Course Card
+const StyledCourseCard = styled(Card)({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    maxHeight: '100%',
-    minHeight: '100%',
-    maxWidth: '200px',
-    minWidth: '200px',
+    height: '100%',
+    maxWidth: '250px',
+    width: '100%',
     borderRadius: '8px',
-
     boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+    transition: 'box-shadow 0.3s ease',
     '&:hover': {
-      boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.3)',
+        boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.3)',
     },
-  }));
+});
 
-  const CourseCardHeader = styled(CardHeader)(({ theme }) => ({
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.secondary.contrastText,
+// Course Card Header with Gradient
+const CourseCardHeader = styled(CardHeader)({
+    backgroundColor: '#3f51b5',
+    color: '#ffffff',
     backgroundImage: 'linear-gradient(135deg, rgba(64,224,208,0.8) 0%, rgba(64,224,208,0.4) 100%)',
     '& .MuiCardHeader-avatar': {
-        border: '2px solid #f3f3f3f3',
+        border: '2px solid #f3f3f3',
         borderRadius: '50%',
     },
-}));
+});
 
-const CourseCardActions = styled(CardActions)(({ theme }) => ({
-    justifyContent: 'space-around',
-}));
+// Actions container
+const CourseCardActions = styled(CardActions)({
+    justifyContent: 'center',
+    padding: '8px',
+});
 
-const CourseButton = styled(Button)(({ theme }) => ({
-    backgroundColor: '#ffff',
-    color: theme.palette.secondary.main,
+// Custom button for viewing the course
+const CourseButton = styled(Button)({
+    backgroundColor: '#3f51b5',
+    color: '#ffffff',
     borderRadius: '8px',
     width: '100%',
-    textAlign: 'center',
     height: '40px',
     fontSize: '14px',
+    fontWeight: 'bold',
     transition: 'background-color 0.3s ease',
-    
     '&:hover': {
-        backgroundColor: theme.palette.secondary.main,
-        color: '#ffff',
-    }
-}));
+        backgroundColor: '#2c387e',
+    },
+});
 
-//{title, instructor, description}
-
-export default function CourseCard() {
-
-    // if (!title || !instructor || !description) {
-    //     return (
-    //         <div>
-    //             <p>No course data available.</p>
-    //         </div>
-    //     );
-    // }
-
-    const course = {
-        title: 'Mathematics',
-        instructor: 'John Doe',
-        description: 'An introductory course to mathematics.',
-    }
+// Main CourseCard functional component
+export default function CourseCard({ title, instructor, description }) {
     return (
-        <>
-        <CourseCard>
+        <StyledCourseCard>
             <CourseCardHeader
-                avatar={<Avatar>course.title.charAt(0)</Avatar>}
-                title={course.title}
-                subheader={course.instructor}
-                sx={{
-                    WebkitBorderBottomRightRadius: '40px',
-                }}
+                avatar={<Avatar>{title.charAt(0).toUpperCase()}</Avatar>}
+                title={title}
+                subheader={`Instructor: ${instructor}`}
             />
-            <CardContent >
-                <Typography variant="body2" color="textSecondary">
-                    Instructor: {course.instructor}
+            <CardContent>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                    Instructor: {instructor}
                 </Typography>
-                <Typography variant="body2" >
-                    {course.description}
+                <Typography variant="body2" color="textPrimary">
+                    {description}
                 </Typography>
-                
             </CardContent>
-            <CourseCardActions sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Stack direction="row" spacing={2}>
-                <Tooltip title="View Notes">
-                <IconButton aria-label="notebook">
-                    <BookIcon />
-                </IconButton>
-                </Tooltip>
-                <Tooltip title="Assignments">
-                <IconButton aria-label="assignments">
-                    <AssignmentIcon />
-                </IconButton>
-                </Tooltip>
-                <Tooltip title="Contact Instructor">
-                <IconButton aria-label="contact instructor">
-                    <BookIcon />
-                </IconButton>
-                </Tooltip>
-            </Stack>
-            <Divider/>
-            <CourseButton  variant="outlined" >View Course</CourseButton>
+            <CourseCardActions sx={{ flexDirection: 'column' }}>
+                <Stack direction="row" spacing={1}>
+                    <Tooltip title="View Notes">
+                        <IconButton aria-label="notebook">
+                            <BookIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Assignments">
+                        <IconButton aria-label="assignments">
+                            <AssignmentIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Contact Instructor">
+                        <IconButton aria-label="contact instructor">
+                            <ContactMailIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Stack>
+                <Divider sx={{ width: '100%', margin: '8px 0' }} />
+                <CourseButton variant="contained" onClick={() => alert(`Viewing ${title}`)}>
+                    View Course
+                </CourseButton>
             </CourseCardActions>
-        </CourseCard>
-        </>
-    )
+        </StyledCourseCard>
+    );
 }
+
+CourseCard.propTypes = {
+    title: propTypes.string.isRequired,
+    instructor: propTypes.string.isRequired,
+    description: propTypes.string.isRequired,
+};

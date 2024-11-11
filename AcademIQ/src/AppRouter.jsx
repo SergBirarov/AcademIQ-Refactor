@@ -1,49 +1,111 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import LoginPage from './pages/LoginPage';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import Performance from './pages/Performance';
-import HomeLayout from './layouts/HomeLayout';
+import MainLayout from './layouts/MainLayout';
 import Courses from './pages/Courses';
-import ManageHumans from './pages/admin/ManageHumans';
-import Tuitions from './pages/admin/Tuitions';
-import Calendar from './pages/admin/Calendar';
-import GeneralInformation from './pages/admin/GeneralInformation';
-import HomeStaff from './pages/admin/HomeStaff';
-import Attendance from './pages/Attendance';
-import Settings from './pages/Settings';
-import ForgotPassword from './pages/ForgotPassword';
-import PasswordReset from './pages/PasswordReset';
-
-
+import PrivateRoute from './pages/navigation/PrivateRoutes';
+import NoMatch from './pages/navigation/NoMatch';
 
 const AppRouter = () => {
-
   return (
-    <Router>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/passwordreset" element={<PasswordReset />} />
-        <Route element={<HomeLayout />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/overview" element={<HomeStaff />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/performance" element={<Performance />} />
-          <Route path="/courses" element={<Courses />} />
-          <Route path='/manage students and staff' element={<ManageHumans />} />
-          <Route path="/tuitions" element={<Tuitions />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path='/general information' element={<GeneralInformation />} />
-          
-          <Route path="/attendance" element={<Attendance />} />
-          <Route path="/settings" element={<Settings />} />
 
+        {/* Routes within the Main Layout */}
+        <Route element={<MainLayout />}>
+          {/* Private Routes */}
+          <Route 
+            path="/home" 
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/profile" 
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/courses" 
+            element={
+              <PrivateRoute>
+                <Courses />
+              </PrivateRoute>
+            } 
+          />
+
+          {/* Uncomment these private routes if needed */}
+          {/* <Route 
+            path="/performance" 
+            element={
+              <PrivateRoute>
+                <Performance />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/manage-students-and-staff" 
+            element={
+              <PrivateRoute>
+                <ManageHumans />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/tuitions" 
+            element={
+              <PrivateRoute>
+                <Tuitions />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/calendar" 
+            element={
+              <PrivateRoute>
+                <Calendar />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/general-information" 
+            element={
+              <PrivateRoute>
+                <GeneralInformation />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/attendance" 
+            element={
+              <PrivateRoute>
+                <Attendance />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/settings" 
+            element={
+              <PrivateRoute>
+                <Settings />
+              </PrivateRoute>
+            } 
+          /> */}
         </Route>
+
+        {/* Handle unmatched routes */}
+        <Route path="*" element={<NoMatch />} />
       </Routes>
-    </Router>
   );
 };
 

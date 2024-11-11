@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LandingButton({ text }) {
   const nav = useNavigate();
   return (
-    <Button variant="contained" size="large" sx={{ mx: 2 }} onClick={() => { nav("/login") }}> 
+    <Button variant="outlined"  sx={{ mx: 2 }} onClick={() => { nav("/login") }}> 
       {text}
     </Button>//TODO
   );
