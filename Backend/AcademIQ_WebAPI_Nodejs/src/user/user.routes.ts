@@ -7,7 +7,7 @@ const userRouter = Router();
 
 //defined verbs
 userRouter
-  .get('/profile',authenticateJWT, getUserById)
+  .get('/profile', getUserById)
   .post('/register', register)
   .post('/login', login)
 

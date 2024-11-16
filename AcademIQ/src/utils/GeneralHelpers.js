@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 
 export function GetVw(px){
     return `${Math.round((px / window.innerWidth) * 100)}vw`;
@@ -33,3 +34,7 @@ export  const setToken = (val) => {
     localStorage.setItem('token', val);
 }
 
+export const decodeToken = () => {
+    const token = getToken();
+    return token ? jwtDecode(token) : null;
+}

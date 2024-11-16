@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import LoginPage from './pages/LoginPage';
 import Home from './pages/Home';
+import HomeStaff from "./pages/admin/HomeStaff";
 import Profile from './pages/Profile';
 import MainLayout from './layouts/MainLayout';
 import Courses from './pages/Courses';
@@ -24,6 +25,14 @@ const AppRouter = () => {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            } 
+          />
+          <Route 
+            path="/home-staff" 
+            element={
+              <PrivateRoute>
+                <HomeStaff />
               </PrivateRoute>
             } 
           />

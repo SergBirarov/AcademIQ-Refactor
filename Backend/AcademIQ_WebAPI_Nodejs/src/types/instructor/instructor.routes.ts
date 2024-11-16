@@ -4,7 +4,7 @@ import { authenticateJWT } from "../../utils/helpers";
 
 const instructorRouter = Router();
 
-instructorRouter.get('/profile',authenticateJWT, getInstructorById)
+instructorRouter.get('/profile', getInstructorById)
                 .post('/register', register);
 
 

@@ -11,7 +11,7 @@ import { signOut } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import UserPanel from '../profile/UserPanel';
-import { ForkLeft, Padding } from '@mui/icons-material';
+import { ForkLeft } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
@@ -20,8 +20,9 @@ const DrawerContainer = styled(Drawer)(() => ({
     position: 'relative',
     borderRadius: '16px',
     backgroundColor: 'transparent',
-
+    width: drawerWidth,
   },
+  maxHeight: '95vh',
 }));
 
 const studentMenuItems = [
@@ -29,16 +30,23 @@ const studentMenuItems = [
   { text: 'Profile', icon: <AssignmentIcon /> },
   { text: 'Performance', icon: <GradeIcon /> },
   { text: 'Settings', icon: <SettingsIcon /> },
-  { text: 'Logout', icon: <LogoutIcon /> },
+];
+
+const staffMenuItems = [
+  { text: 'Dashboard', icon: <HomeIcon /> },
+  { text: 'Manage Students', icon: <ForkLeft /> },
+  { text: 'Manage Instructors', icon: <ForkLeft /> },
+  { text: 'Calendar', icon: <GradeIcon /> },
+  { text: 'Settings', icon: <SettingsIcon /> },
 ];
 
 export default function ResponsiveDrawer({ isDesktop }) {
   const theme = useTheme();
-  const { user } = useSelector((state) => state.auth);
+  const { role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
+  const menu = role === 3 ? studentMenuItems : staffMenuItems;
   const handleLogOut = () => {
     dispatch(signOut());
   };
@@ -51,7 +59,7 @@ export default function ResponsiveDrawer({ isDesktop }) {
   return (
     <DrawerContainer
       variant={isDesktop ? "permanent" : "temporary"}
-      sx={{ width: drawerWidth }}
+      sx={{ width: drawerWidth, flexShrink: 0}}
     >
       <Box>
       <UserPanel />
@@ -60,11 +68,11 @@ export default function ResponsiveDrawer({ isDesktop }) {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          marginTop: '20px',
-          gap: '20px',
+          height: '100%',
+          gap: '5px',
         }}
       >
-        {studentMenuItems.map((item) => (
+        {menu.map((item) => (
           <ListItem key={item.text}>
             <ListItemButton onClick={() => handleMenuClick(`/${item.text.toLowerCase()}`)}>
               <ListItemIcon sx={{ color: theme.palette.primary.main }}>
@@ -75,7 +83,7 @@ export default function ResponsiveDrawer({ isDesktop }) {
           </ListItem>
         ))}
       </Box>
-      <Button variant="outlined" sx={{ width: '100%', position: 'absolute', bottom: '10px' }} onClick={handleLogOut}>
+      <Button variant="outlined" sx={{ width: '100%' }} onClick={handleLogOut}>
         <LogoutIcon />
       </Button>
     </DrawerContainer>

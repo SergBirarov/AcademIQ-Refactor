@@ -33,11 +33,8 @@ export async function login(req: Request, res: Response) {
     const token = generateToken({UserId: userRes.UserId, Role_Code: userRes.Role_Code});
     res.status(200).json({
       authToken: token,
-        user:{
-          id: userRes.UserId,
-          email: userRes.UserEmail,
-          role: userRes.Role_Code
-        }
+      id: userRes.UserId,
+        role: userRes.Role_Code
       })
       console.log("user login done",token);
     } else{

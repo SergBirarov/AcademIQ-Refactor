@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { getStudentCoursesAsync } from '../../../features/courses/courseSlice';
 import  CourseCard  from '../../courses/CourseCard';
 import CompactCourseCard from '../../courses/CompactCard';
+import { getToken,  } from '../../../utils/GeneralHelpers';
+
 
 // const courses = [
 //     { id: 1, title: 'Mathematics', instructor: 'John Doe', description: 'An introductory course to mathematics.' },
@@ -19,6 +21,7 @@ import CompactCourseCard from '../../courses/CompactCard';
 export default function QuickActionsCourses(){
   const dispatch = useDispatch();
   const { courses, status, error } = useSelector((state) => state.courses);
+  const token = getToken();
 
   useEffect(() => {
     dispatch(getStudentCoursesAsync());

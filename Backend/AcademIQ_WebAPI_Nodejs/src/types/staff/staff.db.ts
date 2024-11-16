@@ -1,5 +1,6 @@
 import { StaffType } from "./staff.model";
 import Db from "../../utils/db";
+import sql from 'mssql';
 
 
 
@@ -24,3 +25,22 @@ export async function saveStaff(staff: StaffType, procName: string): Promise<any
         throw err;
     }
 }
+
+export async function assignStudentsToCourses(studentIds: number[], courseId: number): Promise<any> {
+    try{
+    const studentTable = new sql.Table(); // Creating a Table-Valued Parameter (TVP)
+    studentTable.columns.add('StudentId', sql.Int);
+    studentIds.forEach(studentId => {
+        studentTable.rows.add(studentId);
+    });
+
+    // Execute the stored procedure with the TVP parameter
+    const result = await Db.executeStoredProc('AssignStudentsToCourse', {
+        CourseId: courseId,
+        StudentIds: { value: studentTable, type: sql.TVP }
+    });
+    return result;
+}catch(err){
+    console.error("Error in assignStudentsToCourses function:", err);
+    throw err;
+}}

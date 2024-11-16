@@ -1,32 +1,39 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CircularProgress from '@mui/material/CircularProgress';
-import { loginAsync, fetchUserData } from "../features/auth/authSlice";
+import { loginAsync } from "../features/auth/authSlice";
 import { Container, Box, Typography, TextField, Button, Card, CardContent,  } from '@mui/material';
 import { useNavigate  } from "react-router-dom"; // If you are using react-router-dom for navigation
 
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();             
-  const {  status, error } = useSelector((state) => state.auth);
+  const {  status, error, role } = useSelector((state) => state.auth);
   const [UserId, setUserId] = useState("");
   const [PasswordHash, setPasswordHash] = useState("");
 
 
   // Handles login click event
-  const handleLogin =async  (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const loginRes = await dispatch(loginAsync({ UserId, PasswordHash }));
-    if (loginAsync.fulfilled.match(loginRes)) {
-      dispatch(fetchUserData());
+    try {
+        const res = await dispatch(loginAsync({ UserId, PasswordHash }));
+        if (loginAsync.fulfilled.match(res)) {
+          if(role === 1){
+            navigate('/home-staff');
+          }
+          if(role === 2){
+            navigate('/home-instructor');
+          }
+          if(role === 3){
+            navigate('/home'); 
+        }
+      }
+    } catch (error) {
+        console.error('Login failed:', error);
     }
-  }
+};
 
-  useEffect(() => {
-    if (status === 'succeeded') {
-      navigate('/home');
-    }
-  }, [status, navigate]);
 
   return (
     <Container 
