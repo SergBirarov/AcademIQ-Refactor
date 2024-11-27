@@ -54,7 +54,7 @@ const CourseButton = styled(Button)({
 });
 
 // Main CourseCard functional component
-export default function CourseCard({ title, instructor, description }) {
+export default function CourseCard({ title, instructor }) {
     return (
         <StyledCourseCard>
             <CourseCardHeader
@@ -65,9 +65,6 @@ export default function CourseCard({ title, instructor, description }) {
             <CardContent>
                 <Typography variant="body2" color="textSecondary" gutterBottom>
                     Instructor: {instructor}
-                </Typography>
-                <Typography variant="body2" color="textPrimary">
-                    {description}
                 </Typography>
             </CardContent>
             <CourseCardActions sx={{ flexDirection: 'column' }}>

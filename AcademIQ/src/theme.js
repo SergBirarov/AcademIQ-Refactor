@@ -167,6 +167,8 @@ const theme = createTheme({
   shadows: [
     'none',
     '0px 4px 10px rgba(0, 0, 0, 0.1)',
+    '0px 6px 15px rgba(0, 0, 0, 0.15)',
+    '0px 4px 10px rgba(0, 0, 0, 0.1)',
     '0px 6px 15px rgba(0, 0, 0, 0.15)', // Adds a few commonly-used shadows for depth.
   ],
   transitions: {

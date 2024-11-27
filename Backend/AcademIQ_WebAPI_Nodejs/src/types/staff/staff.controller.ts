@@ -1,105 +1,70 @@
 import { Request, Response } from "express";
-import { addStaff, assignStudentsModel, StaffType } from "./staff.model";
+import { addStaff, assignStudentsModel, StaffType, getStaffByIdModel as getById } from "./staff.model";
 import Db from "../../utils/db";
-import { addStudent, StudentType } from "../students/student.model";
 import { addInstructor, InstructorType } from "../instructor/instructor.model";
 
 
-//By id - return staff member
-export async function getStaffById(req: Request, res: Response) {
-    console.log("(getStaffById)");
-    try {
-        let { UserId } = (req as any).user;
-        const result = await Db.query(`select * from Staff where UserId = ${UserId}`);
-        
-        if (!result || result.length === 0) {
-            return res.status(404).json({ message: "User not found" });
-        }
+// Register staff
+export async function registerStaff(req: Request, res: Response) {
+  try {
+      const staff = req.body;
 
-        
-        let profile = result[0];
-        console.log("Fetched staff:", profile);
+      // Save staff to database
+      const result = await addStaff(staff);
+      res.status(201).send(result);
 
-        res.status(200).json(profile);
-
-    } catch (error) {
-        res.status(500).json(error);
-    }
-};
-
-export async function registerStudent(req: Request, res: Response) {
-    try {
-        let {UserId, FirstName, LastName, School_Year, Phone, Picture_URL, Address, City_Code, Enrollment} = req.body;
-        if (UserId === undefined || FirstName === undefined || LastName === undefined || School_Year === undefined || Phone === undefined || Picture_URL === undefined || Address === undefined || City_Code === undefined || Enrollment === undefined)
-          return res.status(400).json({ message: "(register)all fields are required" });
-
-        const student : StudentType = {UserId, FirstName, LastName, School_Year, Phone, Picture_URL, Address, City_Code, Enrollment};
-        const result = await addStudent(student);
-
-        if (result.message == 'Student already exists')
-          return res.status(409).json({ message: "student already exists" });
-        res.status(201).json({ message: "student created successfully" });
-}
-catch(error){
-    res.status(500).json(error);
-}
+  } catch (error) {
+      console.error("Error in registerStaff function:", error);
+      return res.status(500).json({ message: "Failed to register staff", error });
+  }
 }
 
-export async function registerInstructor(req: Request, res: Response) {
-    try{
-        let {
-            UserId,
-            FirstName,
-            LastName,
-            Phone,
-            Major,
-            EmploymentStartDate,
-            Address,
-            City_Code
-          } = req.body;
-          if (FirstName === undefined || LastName === undefined || Phone === undefined || Major === undefined || EmploymentStartDate === undefined || Address === undefined || City_Code === undefined)
-            return res.status(400).json({ message: "(register)all fields are required" });
-      
-          const instructor : InstructorType = {
-            UserId,
-            FirstName,
-            LastName,
-            Phone,
-            Major,
-            EmploymentStartDate,
-            Address,
-            City_Code
-          };
-          const instructorResult = await addInstructor(instructor);
-            console.log("userResult",instructorResult);
-          if (instructorResult.message == 'User already exists')
-            return res.status(409).json({ message: "user already exists" });
-          res.status(201).json({ message: "user created successfully" });
-    }catch(error){
-        res.status(500).json(error);
-    }
-}
 
-export async function assignStudents(req: Request, res: Response) {
-    try{
-        const {CourseId, StudentIds} = req.body;
-        if(!CourseId || !StudentIds)
-          return res.status(400).json({ message: "CourseId and StudentId are required" });
+// // Assign students to course
+// export async function assignStudents(req: Request, res: Response) {
+//   try {
+//       const { studentIds, courseId } = req.body;
 
-        let StudentIdArray: number[] = Array.isArray(StudentIds)? StudentIds: [StudentIds];
-        const result = await assignStudentsModel( StudentIdArray,parseInt(CourseId));
+//       const result = await assignStudentsModel(studentIds, courseId);
+//       res.status(200).json(result);
+//   } catch (error) {
+//       console.error("Error in assignStudents function:", error);
+//       return res.status(500).json({ message: "Failed to assign students", error });
+//   }
+// }
 
-        if (result && result.ErrorMessage) {
-            return res.status(500).json({ message: result.ErrorMessage });
-        }
+export async function getStaffById(req: Request, res: Response){
+  try{
+    const { UserId } = (req as any).user;
 
-        res.status(201).json({ message: "Students assigned to course successfully." });
+    const result = await getById(UserId);
+    res.status(200).send(result);
 
-    }catch (error) {
-        console.error("Error in assignStudents controller:", error);
-        res.status(500).json({ message: "An internal server error occurred." });
-    }
+  }catch(error){
+    console.error("Error in getStaffById function:", error);
+    res.status(500).send("No user found");
+  }
 }
 
 
 
+// export async function adminRegister(req:Request, res: Response){
+//   try{
+//   const user = req.body;
+//   const { Role_Code } = user.Role_Code;
+
+//   let result = null;
+//   switch(Role_Code){
+//     case 2:
+//       result = await adminRegisterInstructor(user);
+//     case 3:
+//       const resultStu = await adminRegisterStudent(user);
+//     default:
+//       res.status(500).send("Error identufying user role to register.")
+//   }
+//   res.status(200).send(result);
+// }catch(error){
+//   console.error("Error in adminRegister function:", error);
+//   res.status(500).send("Failed to register user");
+// }
+// }

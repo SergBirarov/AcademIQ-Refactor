@@ -1,4 +1,5 @@
-import { Drawer, useTheme, Toolbar, Box, Divider, Button, ListItem, ListItemButton, ListItemIcon, ListItemText, Avatar } from '@mui/material';
+import { Drawer, Box, Button, ListItem, ListItemButton, ListItemIcon, ListItemText, List } from '@mui/material';
+import { useTheme } from '@emotion/react';
 import { styled } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -9,20 +10,20 @@ import propTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import UserPanel from '../profile/UserPanel';
 import { ForkLeft } from '@mui/icons-material';
+import { useEffect, useMemo } from 'react';
 
-const drawerWidth = 240;
+const drawerWidth = '240px';
 
 const DrawerContainer = styled(Drawer)(() => ({
   '& .MuiDrawer-paper': {
-    position: 'relative',
+    // position: 'relative',
     borderRadius: '16px',
     backgroundColor: 'transparent',
     width: drawerWidth,
+    padding: 4,
   },
-  maxHeight: '95vh',
 }));
 
 const studentMenuItems = [
@@ -34,7 +35,7 @@ const studentMenuItems = [
 
 const staffMenuItems = [
   { text: 'Dashboard', icon: <HomeIcon /> },
-  { text: 'Manage Students', icon: <ForkLeft /> },
+  { text: 'Manage Students', icon: <AssignmentIcon /> },
   { text: 'Manage Instructors', icon: <ForkLeft /> },
   { text: 'Calendar', icon: <GradeIcon /> },
   { text: 'Settings', icon: <SettingsIcon /> },
@@ -42,14 +43,23 @@ const staffMenuItems = [
 
 export default function ResponsiveDrawer({ isDesktop }) {
   const theme = useTheme();
-  const { role } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const menu = role === 3 ? studentMenuItems : staffMenuItems;
+  const menu = useMemo(() => {
+    console.log("rendering menu", user.Role);
+    return user.Role === "Student" ? studentMenuItems : staffMenuItems;
+  }, [user.Role]);
   const handleLogOut = () => {
     dispatch(signOut());
   };
+
+  useEffect(() => {
+    if(signOut.fulfilled){
+      navigate('/login');
+    }
+  },[dispatch, navigate]);
 
   const handleMenuClick = (path) => {
     navigate(path);
@@ -58,35 +68,44 @@ export default function ResponsiveDrawer({ isDesktop }) {
 
   return (
     <DrawerContainer
-      variant={isDesktop ? "permanent" : "temporary"}
-      sx={{ width: drawerWidth, flexShrink: 0}}
+    variant={isDesktop ? 'permanent' : 'temporary'}
+    anchor="left"
+    open={isDesktop} // Control whether the drawer is open or not based on `isDesktop`
+  >
+    <Box>
+    <UserPanel />
+    </Box>
+    <Box
     >
-      <Box>
-      <UserPanel />
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          gap: '5px',
-        }}
-      >
+      {/* Menu Items Section */}
+      <List>
         {menu.map((item) => (
-          <ListItem key={item.text}>
-            <ListItemButton onClick={() => handleMenuClick(`/${item.text.toLowerCase()}`)}>
+          <ListItem key={item.text} disablePadding>
+            <ListItemButton onClick={() => handleMenuClick(item.text)}>
               <ListItemIcon sx={{ color: theme.palette.primary.main }}>
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary = {item.text} />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
-      </Box>
-      <Button variant="outlined" sx={{ width: '100%' }} onClick={handleLogOut}>
-        <LogoutIcon />
+      </List>
+
+      {/* Logout Button */}
+      <Button
+        variant="outlined"
+        startIcon={<LogoutIcon />}
+        sx={{
+          alignSelf: 'center',
+          width: '80%',
+          marginBottom: theme.spacing(2),
+        }}
+        onClick={handleLogOut}
+      >
+        Logout
       </Button>
-    </DrawerContainer>
+    </Box>
+  </DrawerContainer>
   );
 }
 
@@ -94,3 +113,5 @@ export default function ResponsiveDrawer({ isDesktop }) {
 ResponsiveDrawer.propTypes = {
   isDesktop: propTypes.bool,
 };
+
+

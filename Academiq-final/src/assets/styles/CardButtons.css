@@ -1,0 +1,28 @@
+.card-button {
+    border-radius: 12px;
+    width: 800px;
+    height: 200px;
+
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+  
+  .card-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .icon-container {
+    background: linear-gradient(135deg, rgba(64, 224, 208, 0.8) 0%, rgba(64, 224, 208, 0.4) 100%);
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    padding: 12px;
+    display: inline-block;
+  }
+  

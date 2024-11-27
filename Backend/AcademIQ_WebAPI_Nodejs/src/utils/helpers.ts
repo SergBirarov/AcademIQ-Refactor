@@ -1,19 +1,23 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import bcrypt from "bcrypt";
+
 
 dotenv.config();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
 
-if (!SECRET_KEY) {
-    throw new Error("SECRET_KEY is not defined in the environment variables");
-  }
-
  function generateToken(data: any){
     return jwt.sign(data, SECRET_KEY as jwt.Secret,{ expiresIn: '3000s'});
   }
+
+const encryptPassword = async (password: string) => {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+}
   
   
  const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
@@ -22,7 +26,7 @@ if (!SECRET_KEY) {
     if (authHeader) {
         const token = authHeader.split(' ')[1];
   
-        jwt.verify(token, SECRET_KEY as jwt.Secret, (err, user) => {
+        jwt.verify(token, SECRET_KEY as  string, (err, user) => {
             if (err) {
                 return res.sendStatus(403);
             }
@@ -35,4 +39,4 @@ if (!SECRET_KEY) {
     }
   };
 
-export { generateToken, authenticateJWT};
+export { generateToken, authenticateJWT, encryptPassword };

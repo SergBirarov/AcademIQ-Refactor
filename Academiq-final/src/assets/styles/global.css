@@ -1,0 +1,39 @@
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.multi-line-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Adjust the number of lines */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.course-card {  
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+    transition-behavior: smooth;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        scale: 1.05;
+    }
+}
+
+.grade-failed {
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+  
+  .grade-average {
+    background-color: rgba(255, 255, 0, 0.1);
+  }
+  
+  .grade-excellent {
+    background-color: rgba(0, 255, 0, 0.1);
+  }
+  

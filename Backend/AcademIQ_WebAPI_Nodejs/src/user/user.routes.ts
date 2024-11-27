@@ -1,15 +1,15 @@
 import { Router} from "express";
-import {  getUserById, register, login } from "./user.controller";
-import { authenticateJWT } from "../utils/helpers";
+import * as userController from "./user.controller";
 
 //create router
 const userRouter = Router();
 
 //defined verbs
 userRouter
-  .get('/profile', getUserById)
-  .post('/register', register)
-  .post('/login', login)
+  .get('/profile', userController.getUserById)
+  .post('/register', userController.register)
+  .post('/login', userController.login)
+  .put('/update', userController.updateUser);
 
 //export
 export default userRouter;

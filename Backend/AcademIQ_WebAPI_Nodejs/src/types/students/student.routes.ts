@@ -1,15 +1,15 @@
 import { Router} from "express";
-import { getAllStudents, getStudentById, register, getStudentActiveCourses, assignCourse   } from "./student.controller";
+import { StudentController  } from "./student.controller";
 import { authenticateJWT } from "../../utils/helpers";
 
 
 const studentRouter = Router();
 
-studentRouter.get('/', getAllStudents)
-            .get('/profile',authenticateJWT, getStudentById)
-            .post('/register', register)
-            .get('/:id/active-courses', getStudentActiveCourses)
-            .post('/assign-course', assignCourse);
+studentRouter.get('/profile',authenticateJWT, StudentController.getStudentById)
+// get('/all', StudentController.getAllStudents)
+            // .post('/register', StudentController.register)
+            // .get('/:id/active-courses', StudentController.getStudentActiveCourses)
+            // .post('/assign-course', StudentController.assignCourse);
 
 export default studentRouter;
 

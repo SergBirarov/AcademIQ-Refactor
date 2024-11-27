@@ -1,52 +1,63 @@
 import { Request, Response } from "express";
 import Db from "../../utils/db";
-import { addInstructor, InstructorType } from "./instructor.model";
+import * as instructorModel from "./instructor.model";
 
 
 export async function getInstructorById(req: Request, res: Response) {
     try {
-        let { id } = req.params;
-        const result = await Db.query(`select * from Staff where UserId = ${id}`);
-        res.send(JSON.stringify(result));
+        let { UserId } = req.params;
+        const result = instructorModel.getInstructorByIdModel(parseInt(UserId));
+        if(!result) return res.status(404).json({ message: "Instructor not found" });
+        res.status(200).send(result);
     } catch (error) {   
         res.status(500).json(error);
     }
 }   
 
-export async function register(req: Request, res: Response) {
-    try {
-      let {
-        UserId,
-        FirstName,
-        LastName,
-        Phone,
-        Major,
-        EmploymentStartDate,
-        Address,
-        City_Code
-      } = req.body;
-      if (FirstName === undefined || LastName === undefined || Phone === undefined || Major === undefined || EmploymentStartDate === undefined || Address === undefined || City_Code === undefined)
-        return res.status(400).json({ message: "(register)all fields are required" });
+// export async function register(req: Request, res: Response) {
+//     try {
+//       let {
+//         UserId,
+//         FirstName,
+//         LastName,
+//         Phone,
+//         Major,
+//         EmploymentStartDate,
+//         Address,
+//         City_Code
+//       } = req.body;
+//       if (FirstName === undefined || LastName === undefined || Phone === undefined || Major === undefined || EmploymentStartDate === undefined || Address === undefined || City_Code === undefined)
+//         return res.status(400).json({ message: "(register)all fields are required" });
   
-      const instructor : InstructorType = {
-        UserId,
-        FirstName,
-        LastName,
-        Phone,
-        Major,
-        EmploymentStartDate,
-        Address,
-        City_Code
-      };
-      const instructorResult = await addInstructor(instructor);
-        console.log("userResult",instructorResult);
-      if (instructorResult.message == 'User already exists')
-        return res.status(409).json({ message: "user already exists" });
+//       const instructor : InstructorType = {
+//         UserId,
+//         FirstName,
+//         LastName,
+//         Phone,
+//         Major,
+//         EmploymentStartDate,
+//         Address,
+//         City_Code
+//       };
+//       const instructorResult = await addInstructor(instructor);
+//         console.log("userResult",instructorResult);
+//       if (instructorResult.message == 'User already exists')
+//         return res.status(409).json({ message: "user already exists" });
   
-      res.status(201).json({ message: "user created successfully" });
-  }catch(error){
-      res.status(500).json(error);
-    } 
+//       res.status(201).json({ message: "user created successfully" });
+//   }catch(error){
+//       res.status(500).json(error);
+//     } 
+//   }
+
+  export async function getAllInstructors(req:Request, res: Response){
+    try{
+      const result = await instructorModel.getAllInstructorsModel();
+      res.status(200).send(result);
+    }catch(error){
+      console.log("Error in getAllInstructorsController: ", error);
+      res.status(500).send("Failed to fetch instructors.")
+    }
   }
 
 

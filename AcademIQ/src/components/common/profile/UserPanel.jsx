@@ -4,27 +4,26 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 export default function UserPanel(){
-    const { user, role  } = useSelector((state) => state.auth);
+    const { user  } = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (!user) {
-            alert("User not logged in. Redirecting to login page...");
-          navigate("/login");
+            return(<div>Loading...</div>)
         }
       }, [user, navigate]);
   
         
-    const { FirstName, LastName, Picture_URL} = user;
+    const { Name, Picture_URL, Major, role} = user;
 
     return(
         <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'transparent', padding: 0
         }}>
                 <CardHeader
-                 avatar= {role === 3 ? <UserAvatar image={Picture_URL} size="small" />: null}
+                 avatar= {role === 'Student' ? <UserAvatar image={Picture_URL} size="small" />: null}
                   title={
                   <Typography variant="h6">
-                    {FirstName} {LastName}
+                    {Name}
                     </Typography>}>
                     </CardHeader>
             <CardContent sx={{  backgroundColor: 'transparent', padding: 0}}>
@@ -34,13 +33,13 @@ export default function UserPanel(){
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent:'space-evenly'
-            }}>{ role === 3 ? (
+            }}>{ role === 'Student' ? (
                 <>
                 <Typography variant="body2">
                 <strong>School:</strong> Ruppin Academic Center
             </Typography>
             <Typography variant="body2">
-                <strong>Major:</strong> Software Engineering
+                <strong>Major:</strong> {Major}
             </Typography>
             </>
             ) : (

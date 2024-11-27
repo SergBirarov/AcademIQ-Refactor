@@ -8,7 +8,7 @@ import { useNavigate  } from "react-router-dom"; // If you are using react-route
 export default function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();             
-  const {  status, error, role } = useSelector((state) => state.auth);
+  const {  user, status, error, role } = useSelector((state) => state.auth);
   const [UserId, setUserId] = useState("");
   const [PasswordHash, setPasswordHash] = useState("");
 
@@ -18,21 +18,31 @@ export default function LoginPage() {
     e.preventDefault();
     try {
         const res = await dispatch(loginAsync({ UserId, PasswordHash }));
-        if (loginAsync.fulfilled.match(res)) {
-          if(role === 1){
-            navigate('/home-staff');
-          }
-          if(role === 2){
-            navigate('/home-instructor');
-          }
-          if(role === 3){
-            navigate('/home'); 
-        }
-      }
     } catch (error) {
         console.error('Login failed:', error);
     }
 };
+
+useEffect(() => {
+  if (status === 'succeeded') {
+    if(user.Role === 'Staff'){
+      console.log('navigate staff');
+      navigate('/home-staff', { replace: true,
+        onNavigate: () => { window.location.reload()}});
+    }
+    if(user.Role === 'Instructor'){
+      console.log('navigate instructor');
+      navigate('/home-instructor', { replace: true });
+    }
+    if(user.Role === 'Student'){
+    console.log('navigate student');
+    navigate('/home',  { onNavigate: () => { window.location.reload()}});
+    }
+  } else if (status === 'failed') {
+    console.error('Login failed:', error);
+    navigate('/login', { replace: true });
+  }
+}, [status, navigate, user, error]);
 
 
   return (
@@ -89,7 +99,7 @@ export default function LoginPage() {
             label="ID"
             variant="outlined"
             type="number"
-            value={UserId}
+            // value={''}
             onChange={(e) => setUserId(e.target.value)}
             placeholder="Enter your ID"
             required
@@ -102,7 +112,7 @@ export default function LoginPage() {
             label="Password"
             variant="outlined"
             type="password"
-            value={PasswordHash}
+            // value={''}
             onChange={(e) => setPasswordHash(e.target.value)}
             placeholder="Enter your password"
             required

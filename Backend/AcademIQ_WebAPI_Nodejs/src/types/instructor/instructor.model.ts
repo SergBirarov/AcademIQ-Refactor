@@ -1,4 +1,4 @@
-import { saveInstructor } from "./instructor.bd";
+import * as instructorDb from "./instructor.db";
 
 export type InstructorType = {
     UserId: number;
@@ -13,11 +13,13 @@ export type InstructorType = {
 }
 
 export async function addInstructor(instructor: InstructorType): Promise<any> {
-    try{
-        return await saveInstructor(instructor);
-    }catch(err){
-        console.error("Error in addInstructor function:", err);
-        throw err;
-    }
+    return await instructorDb.saveInstructor(instructor);
 };
 
+export async function getInstructorByIdModel(UserId: number): Promise<any> {
+    return await instructorDb.getInstructorByIdDb(UserId);
+}
+
+export async function getAllInstructorsModel(): Promise<any> {
+    return await instructorDb.getAllInstructorsDb();
+}

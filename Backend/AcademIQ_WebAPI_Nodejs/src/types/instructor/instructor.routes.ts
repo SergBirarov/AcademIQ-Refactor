@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { getInstructorById, register } from "./instructor.controller";
+import { getInstructorById, getAllInstructors } from "./instructor.controller";
 import { authenticateJWT } from "../../utils/helpers";
 
 const instructorRouter = Router();
 
-instructorRouter.get('/profile', getInstructorById)
-                .post('/register', register);
+instructorRouter.get('/profile/:id',authenticateJWT, getInstructorById)
+                // .post('/register',authenticateJWT, register)
+                .get('/all',authenticateJWT,getAllInstructors )
 
 
 export default instructorRouter;

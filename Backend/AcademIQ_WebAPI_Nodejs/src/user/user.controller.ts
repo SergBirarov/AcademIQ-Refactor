@@ -1,6 +1,6 @@
 import  bcrypt  from 'bcrypt';
 import {  Request, Response } from "express";
-import { addUser, UserType, passwordEncryption } from "./user.model";
+import * as userModel from "./user.model";
 import { generateToken, authenticateJWT} from "../utils/helpers";
 import Db from "../utils/db";
 import jwt from 'jsonwebtoken';
@@ -12,118 +12,102 @@ dotenv.config();
 
 
 export async function login(req: Request, res: Response) {
+
   const {  UserId, PasswordHash } = req.body;
-  console.log(UserId, PasswordHash);
+  console.log("User login attempt:", UserId, PasswordHash);
+
   try {
-
-    let userResult = await Db.query(`select * from Users where UserId = @UserId`, {
-      UserId: { value: UserId, type: sql.Int }
-    });
-
-    const request = Db.pool.request();
-    request.input('UserId', UserId);
-
-    const userRes = userResult[0];
-
-    const isMatch = await bcrypt.compare(PasswordHash, userRes.PasswordHash);
-
-    console.log("userRes",userRes);
-
-    if(userRes && isMatch){
-    const token = generateToken({UserId: userRes.UserId, Role_Code: userRes.Role_Code});
-    res.status(200).json({
-      authToken: token,
-      id: userRes.UserId,
-        role: userRes.Role_Code
-      })
-      console.log("user login done",token);
-    } else{
-      res.status(401).send('Username or password incorrect');
+    const user = await userModel.getUserById(UserId);
+    if (!user) {
+      return res.status(401).send('Username or password incorrect');
+    }
+    
+    const isMatch = await bcrypt.compare(PasswordHash, user.PasswordHash);
+    if (!isMatch) {
+      return res.status(401).send('Username or password incorrect');
     }
 
-    // let additionalUserData = {};
-    // if (userRes.Role_Code === 3) {
-    //   // Student
-    //   const studentResult = await Db.query(`SELECT * FROM Students WHERE UserId = @UserId`, {
-    //     UserId: { value: UserId, type: sql.Int }
-    //   });
+    const token = generateToken({UserId: user.UserId, Role_Code: user.Role_Code});
 
-    //   if (studentResult && studentResult.length > 0) {
-    //     additionalUserData = studentResult[0];
-    //   }
-    // } else if (userRes.Role_Code === 2) {
-    //   // Staff
-    //   const staffResult = await Db.query(`SELECT * FROM Staff WHERE UserId = @UserId`, {
-    //     UserId: { value: UserId, type: sql.Int }
-    //   });
-
-    //   if (staffResult && staffResult.length > 0) {
-    //     additionalUserData = staffResult[0];
-    //   }
-    // }
-
-    // // Merge base user data with role-specific data
-    // const user = {
-    //   ...userRes,
-    //   ...additionalUserData,
-    // };
-
-    // const SECRET_KEY = process.env.SECRET_KEY;
-
-    // if (!SECRET_KEY) {
-    //   throw new Error("SECRET_KEY is not defined");
-    // }
-
-    // // Generate a JWT token
-    // const token = jwt.sign({ userId: user.UserId, role: user.Role_Code }, SECRET_KEY, { expiresIn: '1h' });
-
-    // // Return the user data and token
-    // res.status(200).json({ token, user });
-    // console.log("(login)fullUserData:", user);
+    let role = user.Role_Code;
+    if(role === 1){
+      role = "Staff"
+    }
+    else if(role === 2){
+      role = "Instructor"
+    }
+    else if(role === 3){
+      role = "Student"
+    }
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: {
+        Id: user.UserId,
+        Email: user.UserEmail,
+        Role: role,
+        Name: user.FirstName + ' ' + user.LastName,
+        Phone: user.Phone || null,
+        Address: user.Address || null,
+        City: user.City || null,
+        //for 
+        Picture_URL: user.Picture_URL || null,
+        School_Year: user.School_Year || null,
+        Major: user.Major || null,
+        Enrollment: user.Enrollment || null,
+        //for instructor
+        EmploymentStartDate: user.EmploymentStartDate || null,
+      }, role
+    });
+    
+    console.log("User login successful", token);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: 'Login failed', error });
   }
 }
 
-export async function getUserById(req: Request, res: Response) {
-  try {
-    const userId = (req as any).user.UserId;
-    
-    const result = await Db.query(`select * from Users where UserId = ${userId}`, {
-      UserId: { value: userId, type: sql.Int }});
-      if (!result || result.length === 0) {
-        return res.status(404).json({ message: "User not found" });
-      }
-  
-      res.status(200).json(result[0]);
-    } catch (error) {
-      console.error("Error in getProfile:", error);
-      res.status(500).json({ message: "Failed to get user profile", error });
-    }
-}
 
-// {
-//   "UserId": 3333,
-//   "PasswordHash": "123456",
-//   "UserEmail": "student3@ex.com",
-//   "Role_Code": 3
-// }
 
+// Register a new user
 export async function register(req: Request, res: Response) {
   try {
-    let user : UserType = req.body;
-    if (user.UserId === undefined || user.UserEmail === undefined || user.PasswordHash === undefined || user.Role_Code === undefined)
-      return res.status(400).json({ message: "(register)all fields are required" });
+    let userData: userModel.UserType = req.body;
+    userData.PasswordHash = await bcrypt.hash(userData.PasswordHash, 10);
 
-    const userResult = await addUser(user);
-      console.log("userResult",userResult);
-    if (userResult.message == 'User already exists')
-      return res.status(409).json({ message: "user already exists" });
+    if (userData.UserId === undefined || userData.UserEmail === undefined || userData.PasswordHash === undefined || userData.Role_Code === undefined) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
-    res.status(201).json({ message: "user created successfully" });
-}catch(error){
-    res.status(500).json(error);
-  } 
+    const userResult = await userModel.addUser(userData);
+    res.status(201).json({ message: "User created successfully" });
+  } catch (error) {
+    console.error("Registration Error:", error);
+    res.status(500).json({ message: 'Registration failed', error });
+  }
+}
+
+export async function updateUser(req: Request, res: Response) {
+  try {
+    const userData = req.body;
+    const result = await userModel.updateUser(userData);
+    res.status(200).send(result);
+  } catch (error) {
+    console.error("Update Error:", error);
+    res.status(500).send("Failed to update user");
+  }
+}
+// Get user by ID (after being authenticated)
+export async function getUserById(req: Request, res: Response) {
+  try {
+    const {userId} = (req as any).user.UserId;
+
+    // Retrieve user by ID
+    const result = await userModel.getUserById(userId);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Error in getUserById:", error);
+    res.status(500).json({ message: "Failed to get user profile", error });
+  }
 }
 

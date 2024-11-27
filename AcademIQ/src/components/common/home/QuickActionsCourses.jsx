@@ -1,31 +1,25 @@
-import {  Grid2 } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { getStudentCoursesAsync } from '../../../features/courses/courseSlice';
-import  CourseCard  from '../../courses/CourseCard';
+import {  Grid2, Container, Typography, Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
+// import  CourseCard  from '../../courses/CourseCard';
 import CompactCourseCard from '../../courses/CompactCard';
-import { getToken,  } from '../../../utils/GeneralHelpers';
 
 
-// const courses = [
-//     { id: 1, title: 'Mathematics', instructor: 'John Doe', description: 'An introductory course to mathematics.' },
-//     { id: 2, title: 'Physics', instructor: 'Jane Smith', description: 'Learn the fundamentals of physics.' },
-//     { id: 3, title: 'Mathematics', instructor: 'John Doe', description: 'An introductory course to mathematics.' },
-//     { id: 4, title: 'Physics', instructor: 'Jane Smith', description: 'Learn the fundamentals of physics.' },
-//     { id: 6, title: 'Mathematics', instructor: 'John Doe', description: 'An introductory course to mathematics.' },
-//     { id: 7, title: 'Physics', instructor: 'Jane Smith', description: 'Learn the fundamentals of physics.' },
-//   ];
-
-
-
+const StyledContainer = styled(Container)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+    [theme.breakpoints.up('md')]: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    }
+}))
 export default function QuickActionsCourses(){
-  const dispatch = useDispatch();
   const { courses, status, error } = useSelector((state) => state.courses);
-  const token = getToken();
 
-  useEffect(() => {
-    dispatch(getStudentCoursesAsync());
-}, [dispatch]);
 
 if (status === 'loading') {
     return <div>Loading...</div>;
@@ -40,15 +34,30 @@ if (status === 'failed') {
 }
 
     return(
-        <Grid2 container spacing={2}>
-         {courses.map((course) => (
-            <Grid2 item size={{ xs: 12, sm: 6, md: 4}} key={course.id}>
-                <CompactCourseCard
-                    title={course.CourseName}
-                    instructor={course.InstructorFirstName + ' ' + course.InstructorLastName}
-                />
-            </Grid2>
-        ))}
-        </Grid2>
+        <Box component={'section'} padding={0}>
+        <StyledContainer>
+            
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 2 }}>
+                {courses.map((course) => (
+                    <CompactCourseCard
+                        key={course.id}
+                        title={course.CourseName}
+                        instructor={course.InstructorName}
+                    />
+                ))}
+            </Box>
+        </StyledContainer>
+        </Box>
+
+        // <Grid2 container spacing={2}>
+        //  {courses.map((course) => (
+        //     <Grid2 item size={{ xs: 12, sm: 6, md: 4}} key={course.id}>
+        //         <CompactCourseCard
+        //             title={course.CourseName}
+        //             instructor={course.InstructorName}
+        //         />
+        //     </Grid2>
+        // ))}
+        // </Grid2>
     )
 }

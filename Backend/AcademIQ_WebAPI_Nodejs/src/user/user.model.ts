@@ -1,7 +1,9 @@
-import { saveUser } from './user.db';
+// import { UserType } from './user.model';
+import * as userDb from './user.db';
 import bcrypt from "bcrypt";
+import Db from '../utils/db';
 
-const saltRounds = 10;
+// const saltRounds = 10;
 
 export type UserType = {
   UserId: number,
@@ -10,21 +12,21 @@ export type UserType = {
   Role_Code: number,
 }
 
-export async function addUser(user: UserType): Promise<any> {
+export async function addUser(userData: UserType){
+  return await userDb.addUser(userData);
+}
 
-  user.PasswordHash = await passwordEncryption(user.PasswordHash);
-
-  try {
-    return await saveUser(user);
-  } catch (error) {
-    console.log(error); console.error("Error in addUser function:", error); // Log the error
-    throw new Error("Failed to add user"); 
-  }
+export async function getUserById(UserId: number){
+  const result = await userDb.getUserById(UserId);
+  return result.recordset[0];
 };
 
-export const passwordEncryption = async(password: string): Promise<string> => {
+export async function getUserByEmail(UserEmail: string){
+  const result = await userDb.getUserByEmail(UserEmail);
+  return result.recordset[0];
+};
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  return hashedPassword;
-
+export async function updateUser(userData: UserType){
+  return await userDb.updateUser(userData);
 }
+

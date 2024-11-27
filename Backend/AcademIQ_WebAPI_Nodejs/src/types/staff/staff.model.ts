@@ -1,6 +1,4 @@
-import { assignStudentsToCourses, saveStaff } from './staff.db';
-
-
+import * as Db from  './staff.db';
 
 export type StaffType = {
     UserId: number,
@@ -12,21 +10,14 @@ export type StaffType = {
 }
 
 export async function addStaff(staff: StaffType): Promise<any> {
-    try{
-        return await saveStaff(staff, 'sp_AddStaff'); 
-    }catch(err){
-        console.error("Error in addStaff function:", err);
-        throw err;      
-    }
+    return await Db.saveStaff(staff);
 };
 
 export async function assignStudentsModel(studentIds: number[], courseId: number): Promise<any> {
-    try {
-
-        return await assignStudentsToCourses(studentIds, courseId);
-    } catch (err) {
-        console.error("Error in assignStudents function:", err);
-        throw err;
-    }
+    return await Db.assignStudentsToCourses(studentIds, courseId);
        
+}
+
+export async function getStaffByIdModel(UserId: number): Promise<any> {
+    return await Db.getStaffById(UserId);
 }

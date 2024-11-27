@@ -17,8 +17,12 @@ export async function addCourse(courseDetails: any): Promise<any> {
         console.log("(addCourse)params:", params);
         
         // Execute the AddCourse stored procedure
-        const result = await Db.executeStoredProc('AddCourse', params);
-        return result[0]?.Status; // Assuming the stored procedure returns the status message
+        const result = await Db.storedProc('AddCourse', params);
+        if(!result){
+            return "Failed to add course";
+
+        }
+        return result; // Assuming the stored procedure returns the status message
     } catch (err) {
         console.error("Error in addCourse function:", err);
         throw err;
@@ -107,7 +111,7 @@ export async function assignStudentsToCourse(courseId: number, studentIds: numbe
         // request.input('CourseId', sql.Int, courseId);
         // request.input('StudentIds', studentIdTable);
 
-        const result = await Db.executeStoredProc('AssignStudentsToCourse', params);
+        const result = await Db.storedProc('AssignStudentsToCourse', params);
         return result.recordset; // Assuming the stored procedure returns the status
     } catch (err) {
         console.error("Error in assignStudentsToCourseDb function:", err);
