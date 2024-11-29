@@ -1,14 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { getToken } from '../../src/utils/GeneralHelpers';
 import { CourseType } from '../../src/types/MyTypes.type';
-// Define the Course type interface
-// interface Course {
-//   id: number;
-//   name: string;
-//   instructor: string;
-//   description: string;
-//   [key: string]: any; // To support any additional properties
-// }
+
 
 // Define the initial state for the slice
 interface CoursesState {
@@ -64,13 +57,66 @@ export const getCoursesAsync = createAsyncThunk<CourseType[], { userId?: string;
     }
   }
 );
+// CourseId: number; CourseName?: string; ClassRoomName?: string; 
+//      IsActive: boolean
+export const updateCourseAsync = createAsyncThunk<CourseType, 
+  {
+    CourseId: number;
+    CourseName: string;
+    ClassRoomName: string;
+    ClassTimes: string;
+    IsActive: boolean;
+    UserId: number;
+},
+  { rejectValue: string }
+>('course/updateCourse',
+  async (params, { rejectWithValue }) => {
+
+    try {
+      const queryParams = new URLSearchParams();
+      if (params?.CourseId) queryParams.append('CourseId', params.CourseId.toString());
+      if (params?.ClassTimes) queryParams.append('ClassTimes', params.ClassTimes.toString());
+      if (params?.UserId) queryParams.append('UserId', params.UserId.toString());
+      if (params?.CourseName) queryParams.append('CourseName', params.CourseName.toString());
+      if (params?.ClassRoomName) queryParams.append('classRoomName', params.ClassRoomName.toString());
+      if (params?.IsActive) queryParams.append('isActive', params.IsActive.toString());
+
+      const url = `http://localhost:5000/api/courses/update?${queryParams.toString()}`;
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`,
+        },
+      });
+
+      console.log(response)
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to update course');
+      }
+
+      const data: CourseType = await response.json();
+
+      if (!data) {
+        throw new Error('Unexpected response format: data should be a course object');
+      }
+
+      return data;
+    } catch (error: any) {
+      console.error('Error updating course:', error);
+      return rejectWithValue(error.message || 'Network error while updating course');
+    }
+  }
+);
+
 
 // Initial state of the courses slice
 const courseSlice = createSlice({
   name: 'course',
   initialState,
   reducers: {
-    // Only use reducers for synchronous state updates
     resetCourses(state) {
       state.courses = [];
       state.status = 'idle';
@@ -93,12 +139,23 @@ const courseSlice = createSlice({
       .addCase(getCoursesAsync.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || action.error.message || 'Failed to fetch courses';
+      })
+      .addCase(updateCourseAsync.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      // Handle fulfilled state for updating course
+      .addCase(updateCourseAsync.fulfilled, (state ) => {       
+        state.status = 'succeeded';
+      })
+      // Handle rejected state for updating course
+      .addCase(updateCourseAsync.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || action.error.message || 'Failed to update course';
       });
   },
 });
 
-// Export the synchronous action creators
 export const { resetCourses } = courseSlice.actions;
 
-// Export the reducer to use in the store
 export default courseSlice.reducer;

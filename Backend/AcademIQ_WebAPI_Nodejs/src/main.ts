@@ -53,6 +53,7 @@ app.use('/api/events', eventsRouter);
 app.use('/api/submissions', submissionRouter);
 
 
+
 (async () => {
   try {
     await connectToServer();

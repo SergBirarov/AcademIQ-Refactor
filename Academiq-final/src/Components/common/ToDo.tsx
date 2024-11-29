@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Badge, Button, Form, Modal, Card, ButtonGroup, Stack } from 'react-bootstrap';
-import { AiOutlineEdit, AiOutlineDelete, AiOutlinePlus, AiOutlineCalendar, AiOutlineCheck } from 'react-icons/ai';
+import { Container, Row, Col, Badge, Button, Form, Modal, Card, ButtonGroup } from 'react-bootstrap';
+import { AiOutlineEdit, AiOutlinePlus, AiOutlineCalendar, AiOutlineCheck } from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../../Redux/store/store'; // Adjust the import path as needed
 import { Box, Typography } from '@mui/material';
@@ -8,18 +8,6 @@ import { addTaskAsync, deleteTaskAsync, getTasksAsync, Task, updateTaskAsync } f
 import dayjs from 'dayjs';
 
 
-
-// const function TaskCard({ task }: { task: Task }) {
-//   return (
-//     <Card>
-//       <Card.Body>
-//         <Card.Title>{task.Title}</Card.Title>
-//         <Card.Text>{task.Description}</Card.Text>
-//         <Card.Text>{task.DueDate}</Card.Text>
-//       </Card.Body>
-//     </Card>
-//   );
-// }
 
 
 // The To-Do List component
@@ -37,7 +25,9 @@ const ToDoList: React.FC = () => {
   }
 
   useEffect(() => {
-    dispatch(getTasksAsync({ userId: user.Id }));
+    dispatch(getTasksAsync({ userId: user.Id })).then(() => {
+      
+    });
   }, [dispatch]);
   
   // Add a new task
@@ -49,7 +39,7 @@ const ToDoList: React.FC = () => {
         });
       }
     } else {
-      if (currentTask.Title && currentTask.CourseId) {
+      if (currentTask.Title ) {
         const taskToAdd: Task = {
           Title: currentTask.Title,
           Description: currentTask.Description,
@@ -100,7 +90,10 @@ const ToDoList: React.FC = () => {
 
   // Delete a task
   const handleDeleteTask = (id: number) => {
-    dispatch(deleteTaskAsync(id));
+    console.log("Task to be deleted: ", id);
+    dispatch(deleteTaskAsync({ TaskId: id })).then(() => {
+      dispatch(getTasksAsync({ userId: user.Id }));
+    });
   };
 
   // Get the color for due date
@@ -155,7 +148,7 @@ const ToDoList: React.FC = () => {
       <ButtonGroup  className='mt-2 h-100' size='sm' >
         <Button
           variant="success"
-          onClick={() => handleDeleteTask(task.TaskId!)}
+          onClick={() => handleDeleteTask(task.TaskId as number)}
         >
           <AiOutlineCheck />
         </Button>

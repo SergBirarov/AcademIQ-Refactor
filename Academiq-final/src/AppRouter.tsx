@@ -3,13 +3,16 @@ import { Routes, Route } from 'react-router-dom';
 import Landing from './Pages/Landing';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
-// import HomeStaff from './pages/admin/HomeStaff';
+import HomeStaff from './Pages/admin/HomeStaff';
 // import Profile from './pages/Profile';
 import MainLayout from './Layouts/MainLayout';
 import Courses from './Pages/Courses';
 import PrivateRoute from '../Redux/PrivateRoutes';
 import NoMatch from './Pages/navigation/NoMatch';
-import TestPage from './Pages/TestPage';
+import ManageCourses from './Pages/admin/ManageCourses';
+import StudentManagement from './Pages/admin/StudentManagement';
+import Schedules from './Pages/students/Schedules';
+import Assignments from './Pages/students/Assignments';
 
 
 const AppRouter: React.FC = () => {
@@ -30,8 +33,8 @@ const AppRouter: React.FC = () => {
             </PrivateRoute>
           }
         />
-        {/* <Route
-          path="/staff-home"
+         <Route
+          path="/home-staff"
           element={
             <PrivateRoute>
               <HomeStaff />
@@ -39,13 +42,13 @@ const AppRouter: React.FC = () => {
           }
         />
         <Route
-          path="/profile"
+          path="/manage-courses"
           element={
             <PrivateRoute>
-              <Profile />
+              <ManageCourses />
             </PrivateRoute>
           }
-        /> */}
+        /> 
         <Route
           path="/courses"
           element={
@@ -55,34 +58,31 @@ const AppRouter: React.FC = () => {
           }
         />
         
-       
-
-        {/* Uncomment these private routes if needed */}
-         <Route
-            path="/test"
+           <Route
+            path="/manage-students"
             element={
               <PrivateRoute>
-                <TestPage />
-              </PrivateRoute>
-            }
-          />
-          {/*<Route
-            path="/manage-students-and-staff"
-            element={
-              <PrivateRoute>
-                <ManageHumans />
+                <StudentManagement />
               </PrivateRoute>
             }
           />
           <Route
-            path="/tuitions"
+            path="/schedules"
             element={
               <PrivateRoute>
-                <Tuitions />
+                <Schedules />
               </PrivateRoute>
             }
           />
           <Route
+            path="/assignments"
+            element={
+              <PrivateRoute>
+                <Assignments />
+              </PrivateRoute>
+            }
+          />
+         {/* <Route
             path="/calendar"
             element={
               <PrivateRoute>

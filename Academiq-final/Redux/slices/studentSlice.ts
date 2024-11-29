@@ -1,16 +1,21 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-// Define Student interface
-interface Student {
-  id: number;
-  name: string;
-  class: string;
-  [key: string]: any; // Add more fields as required
+// // Define Student interface
+export type StudentType = {
+  UserId: number,
+  FirstName: string,
+  LastName: string,
+  School_Year: number,
+  Major: string,
+  Phone: string,
+  Picture_URL?: string,
+  Address: string,
+  City_Code: number,
+  Enrollment: Date
 }
-
 // Define the initial state for student slice
 interface StudentState {
-  students: Student[];
+  students: StudentType[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -22,12 +27,12 @@ const initialState: StudentState = {
 };
 
 // Thunk to get all students asynchronously
-export const getAllStudentsAsync = createAsyncThunk<Student[], void, { rejectValue: string }>(
+export const getAllStudentsAsync = createAsyncThunk<StudentType[], void, { rejectValue: string }>(
   'student/getAllStudents',
   async (_, { rejectWithValue }) => {
     try {
       const response = await fetch('http://localhost:5000/api/students/all');
-      const data = await response.json();
+      const data: StudentType[] = await response.json();
 
       if (!response.ok) {
         throw new Error('Failed to fetch students');
@@ -55,10 +60,8 @@ const studentSlice = createSlice({
       .addCase(getAllStudentsAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getAllStudentsAsync.fulfilled, (state, action: PayloadAction<Student[]>) => {
-        console.log(action.payload.slice(0, 10)); // For debugging purposes
-        state.students = action.payload;
-        state.status = 'succeeded';
+      .addCase(getAllStudentsAsync.fulfilled, (state, action: PayloadAction<StudentType[]>) => {
+        state.students = action.payload.slice(0, 10);
       })
       .addCase(getAllStudentsAsync.rejected, (state, action) => {
         state.status = 'failed';

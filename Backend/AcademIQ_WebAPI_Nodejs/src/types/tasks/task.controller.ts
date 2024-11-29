@@ -52,9 +52,10 @@ import * as taskModel from './task.model';
 
   export async function deleteTask(req: Request, res: Response){
     try{
-        const taskId = parseInt(req.params.taskId);
+        const TaskId = (req.query as any).TaskId;
         const UserId = (req as any).user.UserId;
-        await taskModel.deleteTaskModel(taskId);
+        console.log("(deleteTask)taskId:", TaskId, "(deleteTask)UserId:", UserId);
+        await taskModel.deleteTaskModel(TaskId);
         res.status(200).json({ message: "Task deleted successfuly."});
     }catch(error){
         console.error("Error in deleteTask", error);
@@ -67,7 +68,7 @@ import * as taskModel from './task.model';
         const userId = req.query.userId ? Number(req.query.userId) : undefined;
         const courseId = req.query.courseId ? Number(req.query.courseId) : undefined;
         console.log("(getTasks)userId:", userId, "(getTasks)courseId:", courseId);
-        // Validate userId to ensure it is a valid number
+
         if (!userId || isNaN(userId)) {
             return res.status(400).json({ message: 'Invalid userId parameter.' });
         }

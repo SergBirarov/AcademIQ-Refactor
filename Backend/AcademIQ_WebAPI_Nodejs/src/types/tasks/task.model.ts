@@ -15,7 +15,7 @@ export const addTaskModel = async (taskData: Task) => {
 export const updateTaskModel = async (taskData: Task) => {
     try{
         const result = await db.updateTaskDb(taskData);
-        return result.recordset;
+        return result;
     }catch(error){
         console.error("Error updating task:", error);
     throw new Error("Failed to update task.");
@@ -24,7 +24,8 @@ export const updateTaskModel = async (taskData: Task) => {
 
 export const deleteTaskModel = async (taskId: number) => {
     try{
-        const result = await db.deleteTaskDb(taskId);
+        console.log("delete task id", taskId);
+        await db.deleteTaskDb(taskId);
         return {message: "Task deleted successfuly."};
     }catch(error){
         console.error("Error deleting task:", error);

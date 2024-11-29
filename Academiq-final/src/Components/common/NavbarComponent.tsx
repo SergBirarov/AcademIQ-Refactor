@@ -30,7 +30,7 @@ export interface MenuItem {
   const theme = useTheme();
 
   if (!user) {
-    return null; // Avoid rendering if the user data is not available
+    return <div>Loading...</div>;
   }
 
   // Menu items for different roles
@@ -61,12 +61,20 @@ export interface MenuItem {
     setShowOffcanvas(!showOffcanvas);
   };
 
-    const handleMenuClick = (path: string) => {
-        if (path === 'Log out') {
-            dispatch(signOutAsync()); // Perform log out
-            navigate('/login');
-          setShowOffcanvas(false);
-      };
+  const handleMenuClick = async (path: string) => {
+      if (path === '/log-out') {
+        setShowOffcanvas(false);
+
+        try {
+            await dispatch(signOutAsync()).unwrap(); 
+            navigate('/login'); 
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
+    } else {
+      console.log(path);
+        navigate(path); 
+    }
     }
 
 

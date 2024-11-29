@@ -61,7 +61,7 @@ export interface Task {
           }
        
         return data;
-      } catch (error: any) {
+      } catch (error) {
         console.error('Error fetching students:', error);
         return rejectWithValue('Network error while fetching tasks');
       }
@@ -92,7 +92,7 @@ export const addTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }
         const data: Task = await response.json();
         console.log(data);
         return data;
-      } catch (error: any) {
+      } catch (error) {
         console.error('Error adding task:', error);
         return rejectWithValue('Network error while adding task');
       }
@@ -103,6 +103,7 @@ export const addTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }
   export const updateTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }>(
     'task/updateTask',
     async (task, { rejectWithValue }) => {
+      console.log("updateTask: " + task.Description);
       try {
         const response = await fetch('http://localhost:5000/api/tasks/update-task', {
           method: 'PUT',
@@ -122,7 +123,7 @@ export const addTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }
         const data: Task = await response.json();
         console.log("updatedTask from slice: ", data);
         return data;
-      } catch (error: any) {
+      } catch (error) {
         console.error('Error updating task:', error);
         return rejectWithValue('Network error while updating task');
       }
@@ -130,24 +131,30 @@ export const addTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }
   );
   
   // Thunk to delete a task
-  export const deleteTaskAsync = createAsyncThunk<number, number, { rejectValue: string }>(
+  export const deleteTaskAsync = createAsyncThunk<Task, { TaskId: number;}, { rejectValue: string }>(
     'task/deleteTask',
-    async (taskId, { rejectWithValue }) => {
-      try {
-        const response = await fetch(`http://localhost:5000/api/tasks/delete-task/${taskId}`, {
+    async (params, { rejectWithValue }) => {
+      const queryParams = new URLSearchParams();
+      if (params?.TaskId) queryParams.append('TaskId', params.TaskId.toString());
+      const url = `http://localhost:5000/api/tasks/delete-task?${queryParams.toString()}`;
+      try {console.log(url);
+        const response = await fetch(url, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${getToken()}`,
           },
         });
+        console.log(response);
   
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || 'Failed to delete task');
         }
   
-        return taskId;
-      } catch (error: any) {
+        const data = await response.json();
+        console.log(data);
+        return data;
+      } catch (error) {
         console.error('Error deleting task:', error);
         return rejectWithValue('Network error while deleting task');
       }
@@ -175,9 +182,10 @@ export const addTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }
         .addCase(addTaskAsync.pending, (state) => {
           state.status = 'loading';
         })
-        .addCase(addTaskAsync.fulfilled, (state, action: PayloadAction<Task>) => {
+        .addCase(addTaskAsync.fulfilled, (state) => {
           state.status = 'succeeded';
-          state.tasks.push(action.payload);
+          
+          // state.tasks.push(action.payload);
         })
         .addCase(addTaskAsync.rejected, (state, action) => {
           state.status = 'failed';
@@ -186,29 +194,23 @@ export const addTaskAsync = createAsyncThunk<Task, Task, { rejectValue: string }
         .addCase(updateTaskAsync.pending, (state) => {
           state.status = 'loading';
         })
-        .addCase(updateTaskAsync.fulfilled, (state, action: PayloadAction<Task>) => {
+        .addCase(updateTaskAsync.fulfilled, (state) => {
           state.status = 'succeeded';
-          const index = state.tasks.findIndex((task) => task.TaskId === action.payload.TaskId);
-          console.log(index);
-          console.log(action.payload);
-          if (index !== -1) {
-            state.tasks[index] = action.payload;
-          }
+          
         })
         .addCase(updateTaskAsync.rejected, (state, action) => {
-          state.status = 'failed';
           state.error = action.payload || 'Failed to update task';
+          state.status = 'failed';
         })
         .addCase(deleteTaskAsync.pending, (state) => {
           state.status = 'loading';
         })
-        .addCase(deleteTaskAsync.fulfilled, (state, action: PayloadAction<number>) => {
+        .addCase(deleteTaskAsync.fulfilled, (state) => {
           state.status = 'succeeded';
-          state.tasks = state.tasks.filter((task) => task.TaskId !== action.payload);
         })
         .addCase(deleteTaskAsync.rejected, (state, action) => {
-          state.status = 'failed';
           state.error = action.payload || 'Failed to delete task';
+          state.status = 'failed';
         });
     },
   });

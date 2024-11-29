@@ -7,6 +7,8 @@ CourseId: number;
     StartDate?: Date;
     EndDate?: Date;
     ClassRoomCode?: number;
+    ClassTimes: string;
+    IsActive: boolean;
 };
 
 export const addCourse = async (courseData: any) => {
@@ -21,7 +23,17 @@ export const addCourse = async (courseData: any) => {
 
 export const updateCourse = async (courseData: any) => {
   try {
-    const result = await courseDb.updateCourse(courseData.CourseId, courseData);
+    const result = await courseDb.updateCourse({
+      CourseId: courseData.CourseId,
+      CourseName: courseData.CourseName,
+      ClassRoomRequired: courseData.ClassRoomRequired,
+      InstructorId: courseData.InstructorId,
+      StartDate: courseData.StartDate,
+      EndDate: courseData.EndDate,
+      ClassRoomCode: courseData.ClassRoomCode,
+      ClassTimes: courseData.ClassTimes,
+      IsActive: courseData.IsActive,
+    });
     return result.recordset;
   } catch (error) {
     console.error("Error updating course:", error);
@@ -42,7 +54,6 @@ export const deleteCourse = async (CourseId: number, UserId: number) => {
 export const getCoursesModel = async (filters: any) => {
   try {
     const result = await courseDb.getCourses(filters);
-    console.log("(getAllCourses)result:", result);
     return result.recordset;
   } catch (error) {
     console.error("Error fetching courses:", error);
@@ -71,5 +82,5 @@ export const assignStudentsToCourse = async (courseId: number, studentIds: numbe
   }
 };
 
-export type CreateCourseType = Omit<CourseType, 'CourseId'>;
+// export type CreateCourseType = Omit<CourseType, 'CourseId'>;
 export type UpdateCourseType = Partial<CourseType>;

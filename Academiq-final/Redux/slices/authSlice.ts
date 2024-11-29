@@ -6,7 +6,7 @@ interface User {
   UserId: number;
   Role: string;
   Picture_URL?: string;
-  [key: string]: any; // Additional fields if needed
+  [key: string]: any; 
 }
 
 interface AuthState {
@@ -59,21 +59,15 @@ export const loginAsync = createAsyncThunk(
 
 export const signOutAsync = createAsyncThunk('auth/signOut', async () => {
   removeToken();
-  await persistor.purge();
+  console.log("Starting signOutAsync...");
+  try {
+    await persistor.purge();
+    console.log("Persistor purged successfully");
+  } catch (error) {
+    console.log("Error purging persistor:", error);
+  }
 });
 
-// const roleNames = (user: User): string => {
-//   switch (user.Role) {
-//     case 1:
-//       return 'Staff';
-//     case 2:
-//       return 'Instructor';
-//     case 3:
-//       return 'Student';
-//     default:
-//       return 'Guest';
-//   }
-// };
 
 const authSlice = createSlice({
   name: 'auth',
@@ -98,7 +92,13 @@ const authSlice = createSlice({
         state.error = action.payload as string;
       })
       .addCase(signOutAsync.fulfilled, (state) => {
-        Object.assign(state, initialState);
+        state.user = null;
+    state.token = null;
+    state.role = null;
+    state.status = 'idle';
+    state.message = null;
+    state.error = null;
+    state.isAuthenticated = false;
       });
   },
 });

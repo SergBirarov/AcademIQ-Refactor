@@ -1,5 +1,6 @@
 import Db from "../../utils/db";
 import sql from "mssql";
+import { CourseType } from "./course.model";
 
 
 
@@ -15,9 +16,11 @@ export async function addCourse(courseDetails: any): Promise<any> {
 }
 
 // Update an existing course
-export async function updateCourse(courseId: number, updateDetails: any): Promise<any> {
+export async function updateCourse( updateDetails: Partial<CourseType>): Promise<any> {
   try {
-      const result = await Db.storedProc('UpdateCourse', { courseId, ...updateDetails });
+      const result = await Db.storedProc('UpdateCourse', { CourseId: updateDetails.CourseId,
+        ...updateDetails });
+      console.log(result)
       return result;
   } catch (err) {
       console.error("Error in updateCourse function:", err);

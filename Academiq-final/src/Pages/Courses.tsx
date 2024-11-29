@@ -1,13 +1,10 @@
 import * as React from 'react';
 import {  Container, Row, Col } from 'react-bootstrap';
 import { Box, Typography } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/store/store';
-import { AppDispatch } from '../../Redux/store/store';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { getAssignmentsAsync } from '../../Redux/slices/assignmentSlice';
-import { getTasksAsync } from '../../Redux/slices/taskSlice';
 import { CourseCard } from '../Components/courses/CourseCard';
 import { CourseType } from '../types/MyTypes.type';
 import ExpandableCard from '../Components/common/ExpandableCard';
@@ -17,11 +14,10 @@ import AssignmentsComponent from '../Components/courses/AssignmentsComponent';
 
 const Courses: React.FC = () => {
     const { user } = useSelector((state: RootState) => state.auth);
-    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const { courses, status } = useSelector((state: RootState) => state.courses);
-    const { tasks } = useSelector((state: RootState) => state.tasks);
-    const { assignments } = useSelector((state: RootState) => state.assignments);
+    const { courses } = useSelector((state: RootState) => state.courses);
+    // const { tasks } = useSelector((state: RootState) => state.tasks);
+    // const { assignments } = useSelector((state: RootState) => state.assignments);
     
     useEffect(() => {
         if (!user) {
@@ -29,6 +25,9 @@ const Courses: React.FC = () => {
         }
     }, [user, navigate]);
 
+    if(!user) {
+        return <div>Loading...</div>;
+    }
    
     
     
@@ -40,7 +39,7 @@ const Courses: React.FC = () => {
           <Row className="align-items-center mb-4">
               <Col md={8} lg={8} xs={12}>
                   <Typography variant="h4" gutterBottom>
-                      {user.Name}'s Courses and Assignments
+                      {user.Name}&apos;s Courses and Assignments
                   </Typography>
               </Col>
               <Col md={4} lg={4} xs={12} className="text-end">

@@ -6,9 +6,20 @@ import { CourseCard } from '../Components/courses/CourseCard';
 import ExpandableCard from '../Components/common/ExpandableCard';
 import ToDoList from '../Components/common/ToDo';
 import CardButtons from '../Components/courses/CardButtons';
+import EventCalendar from '../Components/calendar/EventCalendar';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../Redux/store/store';
+
+
+
+
 
 
 const Home: React.FC = () => {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state: RootState) => state.auth);
+    const { events }= useSelector((state: RootState) => state.calendar);
+    
     return (
             <Container fluid >
                 <Row>
@@ -28,12 +39,8 @@ const Home: React.FC = () => {
                 </Row>
                 <Row>
                     <Col xs={12} md={8}>
-                    <CardButtons/>
+                        <EventCalendar />
                     </Col>
-                    <Col md={{span: 4}} lg={8} xs={12}>
-                        <ToDoList />
-                    </Col>
-
                 </Row>
             </Container>
     );

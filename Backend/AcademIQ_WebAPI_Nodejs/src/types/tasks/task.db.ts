@@ -43,7 +43,8 @@ export async function updateTaskDb(taskDetails: any): Promise<any>{
 
 export async function deleteTaskDb(taskId: any): Promise<any>{
     try{
-        const result = await Db.storedProc('DeleteTask', taskId);
+        console.log("delete task id in db", taskId);
+        const result = await Db.storedProc('DeleteTask', {TaskId: taskId});
         return result;
     }catch(error){
         console.error("Error in addTaskDb function: ", error);

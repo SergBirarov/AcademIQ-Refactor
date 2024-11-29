@@ -9,6 +9,7 @@ courseRouter.post('/add', authenticateJWT, courseController.addCourse)
     .get('/course-information', authenticateJWT, courseController.getCourses)
     .delete('/delete/:courseId', authenticateJWT, courseController.deleteCourse)
     .put('/assign-students/:courseId', authenticateJWT, courseController.assignStudents)
+    .put('/update', authenticateJWT, courseController.updateCourse)
 
 
 export default courseRouter;

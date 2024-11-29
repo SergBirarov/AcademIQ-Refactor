@@ -37,7 +37,7 @@ interface EnrichedSubmission {
     feedback?: string;
 }
 
-const AssignmentsComponent = () => {
+const AssignmentsComponent: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     //redux states
     const { assignments } = useSelector((state: RootState) => state.assignments);

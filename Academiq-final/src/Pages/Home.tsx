@@ -6,12 +6,11 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import QuickCourseView from '../Components/courses/QuickCourseView';
 import { getCoursesAsync } from '../../Redux/slices/courseSlice';
-import { User, Student } from '../types/MyTypes.type';
 import { AppDispatch, RootState } from '../../Redux/store/store';
 import { Box, Container, Divider, Typography } from '@mui/material';
 import { getAssignmentsAsync } from '../../Redux/slices/assignmentSlice';
-import { getTasksAsync } from '../../Redux/slices/taskSlice';
 import { getSubmissionsAsync } from '../../Redux/slices/submissionSlice';
+import { getEventsAsync } from '../../Redux/slices/calendarSlice';
 
 
 /**
@@ -27,6 +26,8 @@ import { getSubmissionsAsync } from '../../Redux/slices/submissionSlice';
  */
 const Home: React.FC = () => {
     const { user, status } = useSelector((state: RootState) => state.auth);
+    const { courses } = useSelector((state: RootState) => state.courses);
+    const { events} = useSelector((state: RootState) => state.calendar);
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     
@@ -40,17 +41,20 @@ const Home: React.FC = () => {
           navigate('/login');
         }
       }, [status, navigate]);
-    
+
+      const courseIds = courses.map((course) => course.CourseId);
+
       useEffect(() => {
         if (status === 'succeeded') {
           dispatch(getCoursesAsync({ userId: user.Id, userType: user.Role }));
           console.log('User logged in. Fetching courses...');
           dispatch(getAssignmentsAsync({ userId: user.Id }));
           console.log('User logged in. Fetching assignments...');
-          dispatch(getTasksAsync({ userId: user?.Id }));
-          console.log('User logged in. Fetching tasks...');
+         
           dispatch(getSubmissionsAsync({ studentId: user?.Id }));
           console.log('User logged in. Fetching submissions...');
+          dispatch(getEventsAsync({userId: user.Id, courseIds: courseIds} ));
+          console.log('User logged in. Fetching events...');
         }
       }, [status, dispatch, user.Id, user.Role]);
     
@@ -73,7 +77,7 @@ const Home: React.FC = () => {
           <Divider sx={{ mb: 2 }} />
           <Box mb={4}>
             <Typography variant="h3" component="h1" gutterBottom>
-              Let's get started!
+              Let&apos;s get started!
             </Typography>
             <QuickCourseView />
           </Box>

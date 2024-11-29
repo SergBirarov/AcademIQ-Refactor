@@ -9,12 +9,13 @@ import studentReducer from '../slices/studentSlice';
 import taskReducer from '../slices/taskSlice';
 import assignmentReducer from '../slices/assignmentSlice';
 import submissionReducer from '../slices/submissionSlice';
+import calendarReducer from '../slices/calendarSlice';
 
 const persistConfig = {
   key: 'root',
   storage,
 
-  whitelist: ['auth', 'courses', 'students', 'instructors', 'tasks', 'assignments', 'submissions' ],
+  whitelist: ['auth', 'courses', 'students', 'instructors', 'tasks', 'assignments', 'submissions', 'calendar'], 
 };
 
 const rootReducer = combineReducers({
@@ -24,8 +25,8 @@ const rootReducer = combineReducers({
   instructors: instructorReducer,
   tasks: taskReducer,
   assignments: assignmentReducer,
-  submissions: submissionReducer
-
+  submissions: submissionReducer,
+  calendar: calendarReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

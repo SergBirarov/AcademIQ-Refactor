@@ -30,17 +30,22 @@ const Login: React.FC = () => {
         .required('Password is required'),
     }),
     onSubmit: async (values) => {
-        try {
-            const resultAction = await dispatch(loginAsync({ UserId: values.id, PasswordHash: values.password }));
-            const result = await resultAction;
-            if (result) {
-              navigate('/home');
-            } else {
-              alert("Login failed. Please check your credentials.");
-            }
-          } catch (error) {
-            console.error("Login error: ", error);
+      try {
+        const resultAction = await dispatch(loginAsync({ UserId: values.id, PasswordHash: values.password }));
+        if (loginAsync.fulfilled.match(resultAction)) {
+          const { user } = resultAction.payload as any;
+  
+          if (user.Role !== 'Student') {
+            navigate('/home-staff');
+          } else {
+            navigate('/home');
           }
+        } else {
+          alert("Login failed. Please check your credentials.");
+        }
+      } catch (error) {
+        console.error("Login error: ", error);
+      }
     },
   });
 

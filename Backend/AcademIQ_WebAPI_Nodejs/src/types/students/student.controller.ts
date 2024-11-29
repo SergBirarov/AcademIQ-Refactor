@@ -1,19 +1,23 @@
 import { Request, Response } from "express";
-import { StudentService } from "./student.model";
+import { StudentService, StudentType } from "./student.model";
+import db from "../../utils/db";
+import { IRecordSet } from "mssql";
 
 
 
 export class StudentController {
 
-    // static async getAllStudents(req: Request, res: Response) {
-    //     try {
-    //         const result = await StudentService.getAllStudents();
-    //         res.status(200).json(result);
-    //     } catch (error) {
-    //         console.error("Error fetching students:", error);
-    //         res.status(500).json({ message: "Internal server error", error });
-    //     }
-    // }
+    static async getAllStudents(req: Request, res: Response) {
+        try {
+            const result = await db.query('SELECT * FROM Students');
+            console.log(result.recordsets);
+            const students = (result.recordsets as IRecordSet<any>[])[0];    
+            res.status(200).json( students);
+        } catch (error) {
+            console.error("Error fetching students:", error);
+            res.status(500).json({ message: "Internal server error", error });
+        }
+    }
 
     static async getStudentById(req: Request, res: Response) {
         try {

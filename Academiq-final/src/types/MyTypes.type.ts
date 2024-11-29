@@ -24,9 +24,11 @@ export interface CourseType {
   CourseId?: number;
   CourseName: string;
   InstructorName: string;
-  classRoomName: string;
+  ClassRoomName: string;
   StartDate?: string;
   EndDate?: string;
+  IsActive: boolean;
+  ClassTimes?: string;
 }
 
 
@@ -42,3 +44,16 @@ export interface Assignment {
   isCompleted?: boolean;
   attachments?: string[];
 };
+
+export interface Event {
+  _id: string;
+  eventId?: string;
+  title: string;
+  type: 'class' | 'exam' | 'assignment' | 'holiday' | 'other';
+  relatedId?: string ;
+  eventStartDate: Date;
+  eventEndDate: Date;
+  location: string;
+  description?: string;
+  addedBy?: string ; 
+}
